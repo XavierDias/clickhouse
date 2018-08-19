@@ -80,6 +80,7 @@
                 <executions>
 					<execution>
 						<id>install node and npm</id>
+						<phase>clean</phase>
 						<goals>
 							<goal>install-node-and-npm</goal>
 						</goals>
@@ -92,6 +93,7 @@
 
 					<execution>
 						<id>npm install</id>
+						<phase>clean</phase>
 						<goals>
 							<goal>npm</goal>
 						</goals>
@@ -103,6 +105,7 @@
 
 					<execution>
 						<id>npm run build</id>
+						<phase>validate</phase>
 						<goals>
 							<goal>npm</goal>
 						</goals>
@@ -120,7 +123,7 @@
                 <executions>
                     <execution>
                         <id>copy-resources</id>
-                        <phase>validate</phase>
+                        <phase>compile</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
@@ -128,7 +131,7 @@
                             <outputDirectory>${basedir}/target/classes/static</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${basedir}/src/main/webapp/dist</directory>
+                                    <directory>src/main/webapp/dist</directory>
                                     <filtering>true</filtering>
                                 </resource>
                             </resources>
