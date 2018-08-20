@@ -1,37 +1,43 @@
 <template>
     <v-layout align-center justify-center row fill-height>
-        <v-flex xs12 sm6 lg4>
-            <v-form class="margin-bottom" ref="form" v-model="valid" lazy-validation>
+        <v-flex xs12 sm8 md6 lg4>
+            <v-card class="pa-4">
+                <v-form ref="form" v-model="valid" lazy-validation>
 
-                <v-text-field
-                    v-model="email"
-                    label="E-mail"
-                    required
-                ></v-text-field>
+                    <h1 class="mb-4">Login</h1>
 
-                <v-text-field
-                    v-model="senha"
-                    :append-icon="showPassword ? 'visibility_off' : 'visibility'"
-                    :type="showPassword ? 'text' : 'password'"
-                    label="Senha"
-                    required
-                    @click:append="showPassword = !showPassword"
-                ></v-text-field>
+                    <v-text-field
+                        v-model="email"
+                        label="E-mail"
+                        required
+                        class="margin-bottom"
+                    ></v-text-field>
 
-                <v-btn
-                    :disabled="!valid"
-                    @click="submit"
-                    color="primary"
-                    class="pull-right"
-                >
-                    Entrar
-                </v-btn>
+                    <v-text-field
+                        v-model="senha"
+                        :append-icon="showPassword ? 'visibility_off' : 'visibility'"
+                        :type="showPassword ? 'text' : 'password'"
+                        label="Senha"
+                        required
+                        @click:append="showPassword = !showPassword"
+                        class="mb-4"
+                    ></v-text-field>
 
-                <v-btn router-link to="/usuario/add">
-                    <v-icon>person_add</v-icon> Cadastrar-se
-                </v-btn>
+                    <v-btn
+                        :disabled="!valid"
+                        @click="submit"
+                        color="primary"
+                        class="pull-right"
+                    >
+                        Entrar
+                    </v-btn>
 
-            </v-form>
+                    <v-btn router-link to="/usuario/add">
+                        <v-icon class="mr-1">person_add</v-icon> Cadastre-se
+                    </v-btn>
+
+                </v-form>
+            </v-card>
         </v-flex>
     </v-layout>
 </template>
@@ -56,10 +62,6 @@
 </script>
 
 <style scoped>
-    .margin-bottom {
-        margin-bottom: 15px;
-    }
-
     .pull-right {
         float: right;
     }
