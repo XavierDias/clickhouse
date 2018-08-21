@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <v-app id="inspire">
-      <v-toolbar flat="true" dense="true" dark color="teal">
+      <v-toolbar flat="true" dense="true" color="transparent">
         <v-btn router-link to="/" icon>
           <v-icon>home</v-icon>
         </v-btn>
