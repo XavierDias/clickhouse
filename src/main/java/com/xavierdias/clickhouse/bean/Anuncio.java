@@ -1,7 +1,7 @@
 package com.xavierdias.clickhouse.bean;
 
 public class Anuncio {
-    private Long idanuncio;
+    private long idanuncio;
     private String tipoanuncio;
     private String cidade;
     private String estado;
@@ -11,7 +11,7 @@ public class Anuncio {
     private double areaconstruida;
     private String descricao;
     private double valor;
-    private Long fk_idusuario;
+    private long fk_idusuario;
 
 
     public Anuncio(){
@@ -19,10 +19,10 @@ public class Anuncio {
     }
 
 
-    public Long getIdanuncio() {
+    public long getIdanuncio() {
         return idanuncio;
     }
-    public void setIdanuncio(Long idanuncio) {
+    public void setIdanuncio(long idanuncio) {
         this.idanuncio = idanuncio;
     }
 

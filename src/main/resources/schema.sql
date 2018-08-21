@@ -1,20 +1,20 @@
 create table usuario
 (
-  idusuario int primary key auto_increment,
-  nome varchar (255) not null,
-  email varchar (255) not null,
+  idusuario integer primary key auto_increment,
+  nome varchar (32) not null,
+  email varchar (32) not null,
   telefone varchar (11) not null,
-  senha varchar (30) not null
+  senha varchar (32) not null
 );
 
 create table anuncio
 (
   idanuncio int primary key auto_increment,
-  tipoanuncio varchar (255) not null,
-  cidade varchar (255) not null,
+  tipoanuncio varchar (32) not null,
+  cidade varchar (32) not null,
   estado char (2) not null,
-  rua varchar (255) not null,
-  bairro varchar (255) not null,
+  rua varchar (32) not null,
+  bairro varchar (32) not null,
   areatotal double not null,
   areaconstruida double not null,
   descricao varchar (255) not null,
