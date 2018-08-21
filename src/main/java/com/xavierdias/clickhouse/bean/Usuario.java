@@ -1,10 +1,30 @@
 package com.xavierdias.clickhouse.bean;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+@Entity
 public class Usuario{
-    private Long idusuario;
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private long idusuario;
+    
+    @NotNull
     private String nome;
+    
+    @NotNull
     private String email;
+    
+    @NotNull
     private String telefone;
+    
+    @NotNull
+    @Size(min = 8, message = "Senha deve ter no mínimo 8 caracteres")
     private String senha;
 
 
@@ -13,10 +33,10 @@ public class Usuario{
     }
 
 
-    public Long getIdusuario() {
+    public long getIdusuario() {
         return idusuario;
     }
-    public void setIdusuario(Long idusuario) {
+    public void setIdusuario(long idusuario) {
         this.idusuario = idusuario;
     }
 
