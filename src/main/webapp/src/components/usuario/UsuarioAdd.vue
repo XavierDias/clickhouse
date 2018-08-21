@@ -8,7 +8,7 @@
                     <h1 class="mb-4">Cadastro</h1>
 
                     <v-text-field
-                        v-model="nome"
+                        v-model="usuario.nome"
                         :rules="nameRules"
                         :counter="32"
                         label="Nome"
@@ -16,14 +16,22 @@
                     ></v-text-field>
 
                     <v-text-field
-                        v-model="email"
+                        v-model="usuario.email"
                         :rules="emailRules"
                         label="E-mail"
                         required
                     ></v-text-field>
 
                     <v-text-field
-                        v-model="senha"
+                        v-model="usuario.telefone"
+                        :mask="'(##) #### - ####'"
+                        :rules="telefoneRules"
+                        label="Telefone"
+                        required
+                    ></v-text-field>
+
+                    <v-text-field
+                        v-model="usuario.senha"
                         :append-icon="showPassword ? 'visibility_off' : 'visibility'"
                         :rules="[passwordRules.required, passwordRules.min]"
                         :type="showPassword ? 'text' : 'password'"
@@ -34,7 +42,7 @@
                     ></v-text-field>
 
                     <v-text-field
-                        v-model="senhaConfirmacao"
+                        v-model="usuario.senhaConfirmacao"
                         :append-icon="showPassword ? 'visibility_off' : 'visibility'"
                         :rules="[passwordConfirmRules.required]"
                         :type="showPassword ? 'text' : 'password'"
@@ -70,24 +78,30 @@
         data: function () {
             return {
                 valid: true,
-                nome: '',
+                usuario: {
+                    nome: '',
+                    email: '',
+                    telefone: '',
+                    senha: '',
+                    senhaConfirmacao: '',
+                },
                 nameRules: [
                     v => !!v || 'Nome é obrigatório',
                     v => (v && v.length <= 32) || 'Nome pode ter nomáximo 32 caracteres'
                 ],
-                email: '',
                 emailRules: [
                     v => !!v || 'E-mail é obrigatório',
                     v => /.+@.+/.test(v) || 'E-mail inválido'
                 ],
-                senha: '',
+                telefoneRules: [
+                    v => !!v || 'Telefone é obrigatório',
+                ],
                 passwordRules: {
                     required: value => !!value || 'Senha é obrigatória',
                     min: v => v.length >= 8 || 'Mínimo de 8 carecteres',
                 },
-                senhaConfirmacao: '',
                 passwordConfirmRules: {
-                    required: value => this.senha === value || 'Precisa ser igual a senha',
+                    required: value => this.usuario.senha === value || 'Precisa ser igual a senha',
                 },
                 showPassword: false
             };
@@ -96,10 +110,12 @@
         methods: {
             submit () {
                 if (this.$refs.form.validate()) {
-                    console.log('foi');
+                    this.$http.post('/usuario', this.usuario)
+                        .then(
+                            () => this.$router.push('/usuario'),
+                            (data) => console.log(data)
+                        );
                 }
-
-                console.log(this);
             },
             clear () {
                 this.$refs.form.reset();
