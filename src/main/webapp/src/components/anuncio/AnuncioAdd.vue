@@ -5,29 +5,71 @@
             <v-card class="pa-4">
                 <v-form ref="form" v-model="valid" lazy-validation>
 
-                    <h1 class="mb-4">Cadastro</h1>
+                    <h1 class="mb-4">Anúncio</h1>
 
                     <v-text-field
-                        v-model="usuario.nome"
-                        :rules="nameRules"
+                        v-model="anuncio.tipoanuncio"
+                        :rules="tipoanuncioRules"
                         :counter="32"
-                        label="Nome"
+                        label=""
                         required
                     ></v-text-field>
 
                     <v-text-field
-                        v-model="usuario.email"
-                        :rules="emailRules"
-                        label="E-mail"
+                        v-model="anuncio.cidade"
+                        :rules="cidadeRules"
+                        label="Cidade"
                         required
                     ></v-text-field>
 
                     <v-text-field
-                        v-model="usuario.telefone"
-                        :mask="'(##) ##### - ####'"
-                        :rules="telefoneRules"
-                        label="Telefone"
+                        v-model="anuncio.estado"
+                        :mask="'##'"
+                        :rules="estadoRules"
+                        label="Estado"
                         required
+                    ></v-text-field>
+
+                    <v-text-field
+                            v-model="anuncio.rua"
+                            :rules="ruaRules"
+                            label="Rua"
+                            required
+                    ></v-text-field>
+
+                    <v-text-field
+                            v-model="anuncio.bairro"
+                            :rules="bairroRules"
+                            label="Bairro"
+                            required
+                    ></v-text-field>
+
+                    <v-text-field
+                            v-model="anuncio.areatotal"
+                            :rules="areatotalRules"
+                            label="Area Total"
+                            required
+                    ></v-text-field>
+
+                    <v-text-field
+                            v-model="anuncio.areaconstruida"
+                            :rules="areaconstruidaRules"
+                            label="Area Construída"
+                            required
+                    ></v-text-field>
+
+                    <v-text-field
+                            v-model="anuncio.descricao"
+                            :rules="descricaoRules"
+                            label="Descrição"
+                            required
+                    ></v-text-field>
+
+                    <v-text-field
+                            v-model="anuncio.valor"
+                            :rules="valorRules"
+                            label="Valor"
+                            required
                     ></v-text-field>
 
                     <v-text-field
