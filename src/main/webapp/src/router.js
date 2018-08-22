@@ -24,5 +24,10 @@ export default new Router({
       name: 'usuario-add',
       component: UsuarioAdd
     },
+      {
+          path: '/usuario/anuncio',
+          name: 'usuario-anuncio',
+          component: AnuncioAdd
+      }
   ]
 })
