@@ -34,7 +34,7 @@ public class AnuncioController {
         return anuncio;
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Object> add(@Valid @RequestBody Anuncio anuncio) {
         repositorio.insert(anuncio);
 
