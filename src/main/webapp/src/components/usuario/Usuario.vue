@@ -1,20 +1,21 @@
 <template>
     <v-layout align-center justify-center row fill-height>
         <v-flex xs12 sm8 md6 lg4>
+
             <v-card class="pa-4">
                 <v-form ref="form" v-model="valid" lazy-validation>
 
                     <h1 class="mb-4">Login</h1>
 
                     <v-text-field
-                        v-model="email"
+                        v-model="username"
                         label="E-mail"
                         required
                         class="margin-bottom"
                     ></v-text-field>
 
                     <v-text-field
-                        v-model="senha"
+                        v-model="password"
                         :append-icon="showPassword ? 'visibility_off' : 'visibility'"
                         :type="showPassword ? 'text' : 'password'"
                         label="Senha"
@@ -38,6 +39,11 @@
 
                 </v-form>
             </v-card>
+
+            <v-btn @click="logout" class="mt-5">
+                Sair
+            </v-btn>
+
         </v-flex>
     </v-layout>
 </template>
@@ -47,17 +53,38 @@
         name: 'Usuario',
         data: () => ({
             valid: true,
-            email: '',
-            senha: '',
+            username: '',
+            password: '',
             showPassword: false
         }),
         methods: {
             submit () {
                 if (this.$refs.form.validate()) {
-                    console.log(this);
+                    this.$http.get(
+                        '/user',
+                        { headers: { authorization : 'Basic ' + btoa(this.username + ':' + this.password) } }
+                    )
+                        .then(
+                            (data) => {
+                                console.log(data);
+                                this.$router.push('/');
+                            },
+                            (data) => console.log(data)
+                        );
                 }
+            },
+            logout () {
+                this.$http.get('/logout')
+                    .then(
+                        () => this.$router.push('/'),
+                        (data) => console.log(data)
+                    );
             }
         }
+    }
+
+    export default class UsuarioService {
+        sub
     }
 </script>
 

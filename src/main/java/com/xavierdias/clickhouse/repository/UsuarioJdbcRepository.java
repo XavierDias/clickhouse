@@ -38,6 +38,11 @@ public class UsuarioJdbcRepository {
                 new BeanPropertyRowMapper<Usuario>(Usuario.class));
     }
 
+    public Usuario findByEmail(String email){
+        return jdbcTemplate.queryForObject("select * from usuario where email=?", new Object[]{email},
+                new BeanPropertyRowMapper<Usuario>(Usuario.class));
+    }
+
     public int deleteById(long idusuario){
         return jdbcTemplate.update("delete from usuario where idusuario=?", new Object[] {idusuario});
     }
