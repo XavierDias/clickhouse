@@ -7,13 +7,10 @@
 
                     <h1 class="mb-4">Anúncio</h1>
 
-                    <v-text-field
-                        v-model="anuncio.tipoanuncio"
-                        :rules="tipoanuncioRules"
-                        :counter="32"
-                        label=""
-                        required
-                    ></v-text-field>
+                    <v-select
+                        :items="tipoAnuncio"
+                        label="Tipo de Anúncio"
+                    ></v-select>
 
                     <v-text-field
                         v-model="anuncio.cidade"
@@ -22,13 +19,10 @@
                         required
                     ></v-text-field>
 
-                    <v-text-field
-                        v-model="anuncio.estado"
-                        :mask="'##'"
-                        :rules="estadoRules"
+                    <v-select
+                        :items="anuncioEstado"
                         label="Estado"
-                        required
-                    ></v-text-field>
+                    ></v-select>
 
                     <v-text-field
                             v-model="anuncio.rua"
@@ -45,14 +39,14 @@
                     ></v-text-field>
 
                     <v-text-field
-                            v-model="anuncio.areatotal"
+                            v-model="anuncio.areaTotal"
                             :rules="areatotalRules"
                             label="Area Total"
                             required
                     ></v-text-field>
 
                     <v-text-field
-                            v-model="anuncio.areaconstruida"
+                            v-model="anuncio.areaConstruida"
                             :rules="areaconstruidaRules"
                             label="Area Construída"
                             required
@@ -70,28 +64,6 @@
                             :rules="valorRules"
                             label="Valor"
                             required
-                    ></v-text-field>
-
-                    <v-text-field
-                        v-model="usuario.senha"
-                        :append-icon="showPassword ? 'visibility_off' : 'visibility'"
-                        :rules="[passwordRules.required, passwordRules.min]"
-                        :type="showPassword ? 'text' : 'password'"
-                        label="Senha"
-                        hint="Mínimo de 8 carecteres"
-                        counter
-                        @click:append="showPassword = !showPassword"
-                    ></v-text-field>
-
-                    <v-text-field
-                        v-model="usuario.senhaConfirmacao"
-                        :append-icon="showPassword ? 'visibility_off' : 'visibility'"
-                        :rules="[passwordConfirmRules.required]"
-                        :type="showPassword ? 'text' : 'password'"
-                        label="Confirmar senha"
-                        hint="Repita a senha"
-                        @click:append="showPassword = !showPassword"
-                        class="mb-4"
                     ></v-text-field>
 
                     <v-btn
@@ -115,25 +87,37 @@
 </template>
 
 <script>
+  export default {
+    data: () => ({
+        tipoAnuncio: [
+                    {label: 'Residencial', options: ['Apartamento', 'Casa', 'Terreno']},
+                    {label: 'Comercial', options: ['Loja', 'Depósito', 'Hotel']},
+                    {label: 'Rural', options: ['Chácara', 'Fazenda', 'Sítio']}
+               ]
+    })
+  }
+</script>
+
+<script>
     export default {
-        name: "User",
+        name: "Anuncio",
         data: function () {
             return {
                 valid: true,
-                usuario: {
-                    nome: '',
-                    email: '',
-                    telefone: '',
-                    senha: '',
-                    senhaConfirmacao: '',
+                anuncio: {
+                    tipoAnuncio: '',
+                    cidade: '',
+                    estado: '',
+                    rua: '',
+                    bairro: '',
+                    areaTotal: '',
+                    areaConstruida: '',
+                    descricao: '',
+                    valor: '',
                 },
-                nameRules: [
-                    v => !!v || 'Nome é obrigatório',
-                    v => (v && v.length <= 32) || 'Nome pode ter nomáximo 32 caracteres'
-                ],
-                emailRules: [
-                    v => !!v || 'E-mail é obrigatório',
-                    v => /.+@.+/.test(v) || 'E-mail inválido'
+                cidadeRules: [
+                    v => !!v || 'Nome da cidade é obrigatório',
+                    v => (v && v.length <= 32) || 'Cidade pode ter no máximo 32 caracteres'
                 ],
                 telefoneRules: [
                     v => !!v || 'Telefone é obrigatório',

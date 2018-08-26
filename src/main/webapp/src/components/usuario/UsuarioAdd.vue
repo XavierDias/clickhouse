@@ -74,7 +74,7 @@
 
 <script>
     export default {
-        name: "User",
+        name: "Usuario",
         data: function () {
             return {
                 valid: true,
