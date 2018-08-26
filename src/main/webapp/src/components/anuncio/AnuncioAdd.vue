@@ -8,8 +8,17 @@
                     <h1 class="mb-4">Anúncio</h1>
 
                     <v-select
+                        v-model="anuncio.tipoanuncio"
                         :items="tipoAnuncio"
                         label="Tipo de Anúncio"
+                        :rules="tipoRules"
+                    ></v-select>
+
+                    <v-select
+                            v-model="anuncio.tipoimovel"
+                            :items="tipoImovel"
+                            label="Tipo de Imóvel"
+                            :rules="imovelRules"
                     ></v-select>
 
                     <v-text-field
@@ -20,8 +29,10 @@
                     ></v-text-field>
 
                     <v-select
+                        v-model="anuncio.estado"
                         :items="anuncioEstado"
                         label="Estado"
+                        :rules="estadoRules"
                     ></v-select>
 
                     <v-text-field
@@ -39,25 +50,25 @@
                     ></v-text-field>
 
                     <v-text-field
-                            v-model="anuncio.areaTotal"
+                            v-model="anuncio.areatotal"
                             :rules="areatotalRules"
                             label="Area Total"
                             required
                     ></v-text-field>
 
                     <v-text-field
-                            v-model="anuncio.areaConstruida"
+                            v-model="anuncio.areaconstruida"
                             :rules="areaconstruidaRules"
                             label="Area Construída"
                             required
                     ></v-text-field>
 
-                    <v-text-field
+                    <v-textarea
                             v-model="anuncio.descricao"
+                            label="Insira a descrição aqui"
+                            value=""
                             :rules="descricaoRules"
-                            label="Descrição"
-                            required
-                    ></v-text-field>
+                    ></v-textarea>
 
                     <v-text-field
                             v-model="anuncio.valor"
@@ -87,58 +98,75 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-        tipoAnuncio: [
-                    {label: 'Residencial', options: ['Apartamento', 'Casa', 'Terreno']},
-                    {label: 'Comercial', options: ['Loja', 'Depósito', 'Hotel']},
-                    {label: 'Rural', options: ['Chácara', 'Fazenda', 'Sítio']}
-               ]
-    })
-  }
-</script>
-
-<script>
     export default {
         name: "Anuncio",
         data: function () {
             return {
                 valid: true,
                 anuncio: {
-                    tipoAnuncio: '',
+                    tipoanuncio: '',
+                    tipoimovel: '',
                     cidade: '',
                     estado: '',
                     rua: '',
                     bairro: '',
-                    areaTotal: '',
-                    areaConstruida: '',
+                    areatotal: '',
+                    areaconstruida: '',
                     descricao: '',
                     valor: '',
                 },
+                tipoRules: [
+                    v => !!v || 'Tipo de anúncio é obrigatório'
+                ],
+                imovelRules: [
+                    v => !!v || 'Tipo de imóvel é obrigatório'
+                ],
                 cidadeRules: [
                     v => !!v || 'Nome da cidade é obrigatório',
                     v => (v && v.length <= 32) || 'Cidade pode ter no máximo 32 caracteres'
                 ],
-                telefoneRules: [
-                    v => !!v || 'Telefone é obrigatório',
+                estadoRules: [
+                    v => !!v || 'Estado é obrigatório',
                 ],
-                passwordRules: {
-                    required: value => !!value || 'Senha é obrigatória',
-                    min: v => v.length >= 8 || 'Mínimo de 8 carecteres',
-                },
-                passwordConfirmRules: {
-                    required: value => this.usuario.senha === value || 'Precisa ser igual a senha',
-                },
-                showPassword: false
+                ruaRules: [
+                    v => !!v || 'Nome da rua é obrigatório',
+                    v => (v && v.length <= 32) || 'Rua pode ter no máximo 32 caracteres'
+                ],
+                bairroRules: [
+                    v => !!v || 'Nome do bairro é obrigatório',
+                    v => (v && v.length <= 32) || 'Bairro pode ter no máximo 32 caracteres'
+                ],
+                areatotalRules: [
+                    v => !!v || 'Tamanho da área total é obrigatório',
+                ],
+                areaconstruidaRules: [
+                    v => !!v || 'Tamanho da área construída é obrigatório',
+                ],
+                areatotalRules: [
+                    v => !!v || 'Tamanho da área total é obrigatório',
+                ],
+                descricaoRules: [
+                    v => !!v || 'Descrição é obrigatória',
+                    v => (v && v.length <= 255) || 'A descrição pode ter no máximo 255 caracteres'
+                ],
+                valorRules: [
+                    v => !!v || 'Valor é obrigatório'
+                ],
+                tipoAnuncio: ['Aluguel', 'Venda'],
+                tipoImovel: ['Comercial', 'Residencial', 'Rural'],
+                anuncioEstado: ['AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS', 'MT', 'PA', 'PB',
+                    'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO']
             };
+
+
         },
 
         methods: {
             submit () {
                 if (this.$refs.form.validate()) {
-                    this.$http.post('/usuario', this.usuario)
+                    this.$http.post('/anuncio/add', this.anuncio)
                         .then(
-                            () => this.$router.push('/usuario'),
+                            () => this.$router.push('/anuncio'),
                             (data) => console.log(data)
                         );
                 }
