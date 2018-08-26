@@ -1,13 +1,17 @@
 package com.xavierdias.clickhouse.controller;
 
 import com.xavierdias.clickhouse.bean.Anuncio;
+import com.xavierdias.clickhouse.bean.Usuario;
 import com.xavierdias.clickhouse.repository.AnuncioJdbcRepository;
+import com.xavierdias.clickhouse.repository.UsuarioJdbcRepository;
+import com.xavierdias.clickhouse.security.UsuarioDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +26,9 @@ public class AnuncioController {
     @Autowired
     private AnuncioJdbcRepository repositorio;
 
+    @Autowired
+    private UsuarioJdbcRepository usuarioRepository;
+
     @GetMapping("")
     public List<Anuncio> buscaTodosAnuncios(){
         return repositorio.findAll();
@@ -34,8 +41,11 @@ public class AnuncioController {
         return anuncio;
     }
 
-    @PostMapping
-    public ResponseEntity<Object> add(@Valid @RequestBody Anuncio anuncio) {
+    @PostMapping("/add")
+    public ResponseEntity<Object> add(@Valid @RequestBody Anuncio anuncio, Principal user) {
+        Usuario usuario = usuarioRepository.findByEmail(user.getName());
+
+        anuncio.setFk_idusuario(usuario.getIdusuario());
         repositorio.insert(anuncio);
 
         return ResponseEntity.noContent().build();

@@ -1,16 +1,50 @@
 package com.xavierdias.clickhouse.bean;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+@Entity
 public class Anuncio {
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long idanuncio;
+
+    @NotNull
     private String tipoanuncio;
+
+    @NotNull
+    private String tipoimovel;
+
+    @NotNull
     private String cidade;
+
+    @NotNull
     private String estado;
+
+    @NotNull
     private String rua;
+
+    @NotNull
     private String bairro;
+
+    @NotNull
     private double areatotal;
+
+    @NotNull
     private double areaconstruida;
+
+    @NotNull
     private String descricao;
+
+    @NotNull
     private double valor;
+
+    @NotNull
     private long fk_idusuario;
 
 
@@ -31,6 +65,13 @@ public class Anuncio {
     }
     public void setTipoanuncio(String tipoanuncio) {
         this.tipoanuncio = tipoanuncio;
+    }
+
+    public String getTipoimovel() {
+        return tipoimovel;
+    }
+    public void setTipoimovel(String tipoimovel) {
+        this.tipoimovel = tipoimovel;
     }
 
     public String getCidade() {

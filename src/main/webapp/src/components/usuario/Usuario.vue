@@ -82,10 +82,6 @@
             }
         }
     }
-
-    export default class UsuarioService {
-        sub
-    }
 </script>
 
 <style scoped>

@@ -20,8 +20,9 @@ public class AnuncioJdbcRepository {
         @Override
         public Anuncio mapRow(ResultSet resultSet, int rowNum) throws SQLException {
             Anuncio anuncio = new Anuncio();
-            anuncio.setIdanuncio(resultSet.getLong("id"));
-            anuncio.setTipoanuncio(resultSet.getString("tipo"));
+            anuncio.setIdanuncio(resultSet.getLong("idanuncio"));
+            anuncio.setTipoanuncio(resultSet.getString("tipoanuncio"));
+            anuncio.setTipoimovel(resultSet.getString("tipoimovel"));
             anuncio.setCidade(resultSet.getString("cidade"));
             anuncio.setEstado(resultSet.getString("estado"));
             anuncio.setRua(resultSet.getString("rua"));
@@ -50,14 +51,26 @@ public class AnuncioJdbcRepository {
     }
 
     public int insert(Anuncio anuncio){
-        return jdbcTemplate.update("insert into anuncio (tipoanuncio, cidade, estado, rua, bairro, areatotal, areaconstruida, descricao, valor)" 
-                        + "values(?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                new Object[] {anuncio.getTipoanuncio(), anuncio.getCidade(), anuncio.getEstado(), anuncio.getRua(), anuncio.getBairro(), anuncio.getAreatotal(), anuncio.getAreaconstruida(), anuncio.getDescricao(), anuncio.getValor()});
+        return jdbcTemplate.update("insert into anuncio (tipoanuncio, tipoimovel, cidade, estado, rua, bairro, areatotal, areaconstruida, descricao, valor, fk_idusuario)"
+            + "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            new Object[] {
+                anuncio.getTipoanuncio(),
+                anuncio.getTipoimovel(),
+                anuncio.getCidade(),
+                anuncio.getEstado(),
+                anuncio.getRua(),
+                anuncio.getBairro(),
+                anuncio.getAreatotal(),
+                anuncio.getAreaconstruida(),
+                anuncio.getDescricao(),
+                anuncio.getValor(),
+                anuncio.getFk_idusuario()
+        });
     }
 
     public int update(Anuncio anuncio){
-        return  jdbcTemplate.update("update anuncio " + " set tipoanuncio = ?, cidade = ?, estado = ?, rua = ?, bairro = ?, areatotal = ?, areaconstruida = ?, descricao = ?, valor = ?, " + 
+        return  jdbcTemplate.update("update anuncio " + " set tipoanuncio = ?, tipoimovel = ?, cidade = ?, estado = ?, rua = ?, bairro = ?, areatotal = ?, areaconstruida = ?, descricao = ?, valor = ?, " +
                         " where idanuncio = ?",
-                new Object[] {anuncio.getTipoanuncio(), anuncio.getCidade(), anuncio.getEstado(), anuncio.getRua(), anuncio.getBairro(), anuncio.getAreatotal(), anuncio.getAreaconstruida(), anuncio.getDescricao(), anuncio.getValor()});
+                new Object[] {anuncio.getTipoanuncio(), anuncio.getTipoimovel(), anuncio.getCidade(), anuncio.getEstado(), anuncio.getRua(), anuncio.getBairro(), anuncio.getAreatotal(), anuncio.getAreaconstruida(), anuncio.getDescricao(), anuncio.getValor()});
     }
 }
