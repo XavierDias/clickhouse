@@ -40,10 +40,6 @@
                 </v-form>
             </v-card>
 
-            <v-btn @click="logout" class="mt-5">
-                Sair
-            </v-btn>
-
         </v-flex>
     </v-layout>
 </template>
@@ -68,18 +64,13 @@
                             (data) => {
                                 console.log(data);
                                 this.$router.push('/');
+                                localStorage.setItem('isLoged', true);
+                                localStorage.setItem('username', this.username);
                             },
                             (data) => console.log(data)
                         );
                 }
             },
-            logout () {
-                this.$http.get('/logout')
-                    .then(
-                        () => this.$router.push('/'),
-                        (data) => console.log(data)
-                    );
-            }
         }
     }
 </script>
