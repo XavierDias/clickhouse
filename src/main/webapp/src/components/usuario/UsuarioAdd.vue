@@ -110,7 +110,7 @@
         methods: {
             submit () {
                 if (this.$refs.form.validate()) {
-                    this.$http.post('/usuario', this.usuario)
+                    this.$http.post('/signup', this.usuario)
                         .then(
                             () => this.$router.push('/usuario'),
                             (data) => console.log(data)

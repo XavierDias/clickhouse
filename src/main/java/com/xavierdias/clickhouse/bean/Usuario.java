@@ -68,6 +68,20 @@ public class Usuario{
         this.senha = senha;
     }
 
+    public String getUsername() {
+        return email;
+    }
+    public void setUsername(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return senha;
+    }
+    public void setPassword(String senha) {
+        this.senha = senha;
+    }
+
     @Override
     public String toString(){
         return String.format("Usuário [id = %s, nome = %s, email = %s, telefone = %s, senha = %s]", idusuario, nome, email, telefone, senha);

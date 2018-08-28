@@ -166,7 +166,7 @@
                 if (this.$refs.form.validate()) {
                     this.$http.post('/anuncio/add', this.anuncio)
                         .then(
-                            () => this.$router.push('/anuncio'),
+                            () => this.$router.push('/'),
                             (data) => console.log(data)
                         );
                 }

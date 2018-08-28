@@ -44,7 +44,7 @@ public class Anuncio {
     @NotNull
     private double valor;
 
-    @Ignore
+    @NotNull
     private long fk_idusuario;
 
 
