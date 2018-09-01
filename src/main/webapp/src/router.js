@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Usuario from './components/usuario/Usuario.vue'
 import UsuarioAdd from './components/usuario/UsuarioAdd.vue'
+import UsuarioEdt from './components/usuario/UsuarioEdt.vue'
 import AnuncioAdd from './components/anuncio/AnuncioAdd.vue'
 import Home from './components/home/Home.vue'
 
@@ -24,6 +25,11 @@ export default new Router({
       path: '/usuario/add',
       name: 'usuario-add',
       component: UsuarioAdd
+    },
+    {
+      path: '/usuario/edt',
+      name: 'usuario-edt',
+      component: UsuarioEdt
     },
     {
       path: '/anuncio/add',

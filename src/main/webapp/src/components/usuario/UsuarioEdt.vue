@@ -5,67 +5,68 @@
             <v-card class="pa-4">
                 <v-form ref="form" v-model="valid" lazy-validation>
 
-                    <h1 class="mb-4">Cadastro</h1>
+                    <h1 class="mb-4">Editar dados do usuário</h1>
 
                     <v-text-field
-                        v-model="usuario.nome"
-                        :rules="nameRules"
-                        :counter="32"
-                        label="Nome"
-                        required
+                            v-model="usuario.nome"
+                            :rules="nameRules"
+                            :counter="32"
+                            label="Nome"
+                            required
                     ></v-text-field>
 
                     <v-text-field
-                        v-model="usuario.email"
-                        :rules="emailRules"
-                        label="E-mail"
-                        required
+                            v-model="usuario.email"
+                            :rules="emailRules"
+                            label="E-mail"
+                            required
                     ></v-text-field>
 
                     <v-text-field
-                        v-model="usuario.telefone"
-                        :mask="'(##) ##### - ####'"
-                        :rules="telefoneRules"
-                        label="Telefone"
-                        required
+                            v-model="usuario.telefone"
+                            :mask="'(##) ##### - ####'"
+                            :rules="telefoneRules"
+                            label="Telefone"
+                            required
                     ></v-text-field>
 
                     <v-text-field
-                        v-model="usuario.senha"
-                        :append-icon="showPassword ? 'visibility_off' : 'visibility'"
-                        :rules="[passwordRules.required, passwordRules.min]"
-                        :type="showPassword ? 'text' : 'password'"
-                        label="Senha"
-                        hint="Mínimo de 8 carecteres"
-                        counter
-                        @click:append="showPassword = !showPassword"
-                        required
+                            v-model="usuario.senha"
+                            :append-icon="showPassword ? 'visibility_off' : 'visibility'"
+                            :rules="[passwordRules.required, passwordRules.min]"
+                            :type="showPassword ? 'text' : 'password'"
+                            label="Senha"
+                            hint="Mínimo de 8 carecteres"
+                            counter
+                            @click:append="showPassword = !showPassword"
+                            required
                     ></v-text-field>
 
                     <v-text-field
-                        v-model="usuario.senhaConfirmacao"
-                        :append-icon="showPassword ? 'visibility_off' : 'visibility'"
-                        :rules="[passwordConfirmRules.required]"
-                        :type="showPassword ? 'text' : 'password'"
-                        label="Confirmar senha"
-                        hint="Repita a senha"
-                        @click:append="showPassword = !showPassword"
-                        class="mb-4"
-                        required
+                            v-model="usuario.senhaConfirmacao"
+                            :append-icon="showPassword ? 'visibility_off' : 'visibility'"
+                            :rules="[passwordConfirmRules.required]"
+                            :type="showPassword ? 'text' : 'password'"
+                            label="Confirmar senha"
+                            hint="Repita a senha"
+                            @click:append="showPassword = !showPassword"
+                            class="mb-4"
+                            required
                     ></v-text-field>
 
                     <v-btn
-                        :disabled="!valid"
-                        @click="submit"
-                        color="primary"
-                        class="pull-right"
+                            :disabled="!valid"
+                            @click="submit"
+                            color="primary"
+                            class="pull-right"
                     >
                         <v-icon class="mr-1">save</v-icon> Salvar
                     </v-btn>
 
                     <v-btn
-                        @click="clear">
-                        <v-icon class="mr-1">clear</v-icon> Limpar
+                            @click="clear"
+                    >
+                        <v-icon class="mr-1">clear</v-icon> Cancelar
                     </v-btn>
 
                 </v-form>
@@ -77,7 +78,7 @@
 
 <script>
     export default {
-        name: "UsuarioAdd",
+        name: "UsuarioEdt",
         data: function () {
             return {
                 valid: true,

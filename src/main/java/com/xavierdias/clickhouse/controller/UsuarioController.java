@@ -31,11 +31,6 @@ public class UsuarioController {
         return user;
     }
 
-    @GetMapping("/ususario")
-    public List<Usuario> buscaTodosUsuarios(){
-        return repositorio.findAll();
-    }
-
     @GetMapping("/usuario/{id}")
     public Usuario buscaUsuario(@PathVariable long id){
         Usuario usuario = repositorio.findById(id);

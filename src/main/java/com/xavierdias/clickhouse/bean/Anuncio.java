@@ -2,13 +2,11 @@ package com.xavierdias.clickhouse.bean;
 
 import jdk.nashorn.internal.ir.annotations.Ignore;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name="anuncio")
 public class Anuncio {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -130,7 +128,7 @@ public class Anuncio {
         this.valor = valor;
     }
 
-    public Long getFk_idusuario() {
+    public long getFk_idusuario() {
         return fk_idusuario;
     }
     public void setFk_idusuario(Long fk_idusuario) {
@@ -139,7 +137,7 @@ public class Anuncio {
 
     @Override
     public String toString(){
-        return String.format("Anuncio [id = %s, tipo = %s, cidade = %s, estado = %s, rua = %s, bairro = %s, areatotal = %s, areaconstruida = %s, descricao = %s, valor = %s, fk_id= %s]", idanuncio, tipoanuncio, cidade, estado,
+        return String.format("Anuncio [id = %s, tipoanuncio = %s, tipoimovel = %s, cidade = %s, estado = %s, rua = %s, bairro = %s, areatotal = %s, areaconstruida = %s, descricao = %s, valor = %s, fk_id= %s]", idanuncio, tipoanuncio, tipoimovel, cidade, estado,
                 rua, bairro, areatotal, areaconstruida, descricao, valor, fk_idusuario);
     }
 }

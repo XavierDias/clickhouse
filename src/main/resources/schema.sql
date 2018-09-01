@@ -1,6 +1,6 @@
 create table usuario
 (
-  idusuario integer primary key auto_increment,
+  idusuario int primary key auto_increment,
   nome varchar (32) not null,
   email varchar (32) not null,
   telefone varchar (11) not null,
@@ -23,3 +23,4 @@ create table anuncio
   fk_idusuario int null,
   foreign key (fk_idusuario) references usuario(idusuario)
 );
+
