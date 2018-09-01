@@ -56,7 +56,7 @@
 
                     <v-btn
                             :disabled="!valid"
-                            @click="submit"
+                            @click="salvar"
                             color="primary"
                             class="pull-right"
                     >
@@ -64,7 +64,7 @@
                     </v-btn>
 
                     <v-btn
-                            @click="clear"
+                            @click="cancelar"
                     >
                         <v-icon class="mr-1">clear</v-icon> Cancelar
                     </v-btn>
@@ -111,18 +111,30 @@
             };
         },
 
+        mounted: function () {{
+            this.$http.get("/usuario/1")
+                .then(resposta => resposta.json())
+                .then((resposta) => {
+                    console.log("Recebido!");
+                    this.usuario = resposta;
+                    this.usuario.senha = "";
+                    this.usuario.senhaConfirmacao = "";
+                }
+            );
+        }},
+
         methods: {
-            submit () {
+            salvar () {
                 if (this.$refs.form.validate()) {
-                    this.$http.post('/signup', this.usuario)
+                    this.$http.put('/usuario/edit/1', this.usuario)
                         .then(
-                            () => this.$router.push('/usuario'),
+                            () => this.$router.push('/'),
                             (data) => console.log(data)
                         );
                 }
             },
-            clear () {
-                this.$refs.form.reset();
+            cancelar () {
+                this.$router.push('/');
             }
         }
     }

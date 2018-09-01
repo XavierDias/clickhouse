@@ -53,7 +53,7 @@ public class UsuarioJdbcRepository {
     }
 
     public int update(Usuario usuario){
-        return jdbcTemplate.update("update usuario " + " set nome = ?, email = ?, telefone = ?, senha = ? " + " where idusuaro = ?",
-                new Object[] {usuario.getNome(), usuario.getEmail(), usuario.getTelefone(), usuario.getSenha()});
+        return jdbcTemplate.update("update usuario " + " set nome = ?, email = ?, telefone = ?, senha = ? " + " where idusuario = ?",
+                new Object[] {usuario.getNome(), usuario.getEmail(), usuario.getTelefone(), usuario.getSenha(), usuario.getIdusuario()});
     }
 }

@@ -4,7 +4,7 @@ create table usuario
   nome varchar (32) not null,
   email varchar (32) not null,
   telefone varchar (11) not null,
-  senha varchar (32) not null
+  senha varchar (255) not null
 );
 
 create table anuncio
