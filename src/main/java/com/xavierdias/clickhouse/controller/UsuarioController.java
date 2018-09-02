@@ -31,11 +31,6 @@ public class UsuarioController {
         return user;
     }
 
-    @GetMapping("/ususario")
-    public List<Usuario> buscaTodosUsuarios(){
-        return repositorio.findAll();
-    }
-
     @GetMapping("/usuario/{id}")
     public Usuario buscaUsuario(@PathVariable long id){
         Usuario usuario = repositorio.findById(id);
@@ -53,12 +48,12 @@ public class UsuarioController {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/ususario/delete/{id}")
+    @DeleteMapping("/usuario/delete/{id}")
     public ResponseEntity<Object> delete(@PathVariable long id){
         return ResponseEntity.notFound().build();
     }
 
-    @PutMapping("/ususario/edit/{id}")
+    @PutMapping("/usuario/edit/{id}")
     public ResponseEntity<Object> alter(@Valid @RequestBody Usuario usuario, @PathVariable long id) {
         Optional<Usuario> temp = Optional.of(repositorio.findById(id));
 

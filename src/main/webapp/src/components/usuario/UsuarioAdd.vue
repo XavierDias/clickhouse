@@ -39,6 +39,7 @@
                         hint="Mínimo de 8 carecteres"
                         counter
                         @click:append="showPassword = !showPassword"
+                        required
                     ></v-text-field>
 
                     <v-text-field
@@ -50,6 +51,7 @@
                         hint="Repita a senha"
                         @click:append="showPassword = !showPassword"
                         class="mb-4"
+                        required
                     ></v-text-field>
 
                     <v-btn
@@ -61,7 +63,8 @@
                         <v-icon class="mr-1">save</v-icon> Salvar
                     </v-btn>
 
-                    <v-btn @click="clear">
+                    <v-btn
+                        @click="clear">
                         <v-icon class="mr-1">clear</v-icon> Limpar
                     </v-btn>
 
@@ -74,7 +77,7 @@
 
 <script>
     export default {
-        name: "Usuario",
+        name: "UsuarioAdd",
         data: function () {
             return {
                 valid: true,
