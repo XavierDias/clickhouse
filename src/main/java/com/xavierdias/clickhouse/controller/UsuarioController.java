@@ -31,9 +31,9 @@ public class UsuarioController {
         return user;
     }
 
-    @GetMapping("/usuario/{id}")
-    public Usuario buscaUsuario(@PathVariable long id){
-        Usuario usuario = repositorio.findById(id);
+    @GetMapping("/usuario")
+    public Usuario buscaUsuario(Principal user){
+        Usuario usuario = repositorio.findByEmail(user.getName());
 
         return usuario;
     }
