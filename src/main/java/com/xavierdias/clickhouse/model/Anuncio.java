@@ -1,6 +1,4 @@
-package com.xavierdias.clickhouse.bean;
-
-import jdk.nashorn.internal.ir.annotations.Ignore;
+package com.xavierdias.clickhouse.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

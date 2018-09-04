@@ -1,6 +1,6 @@
 package com.xavierdias.clickhouse.repository;
 
-import com.xavierdias.clickhouse.bean.Usuario;
+import com.xavierdias.clickhouse.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;

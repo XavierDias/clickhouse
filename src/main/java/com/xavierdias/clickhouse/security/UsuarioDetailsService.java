@@ -1,6 +1,6 @@
 package com.xavierdias.clickhouse.security;
 
-import com.xavierdias.clickhouse.bean.Usuario;
+import com.xavierdias.clickhouse.model.Usuario;
 import com.xavierdias.clickhouse.repository.UsuarioJdbcRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
