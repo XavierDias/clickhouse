@@ -69,8 +69,20 @@ public class AnuncioJdbcRepository {
     }
 
     public int update(Anuncio anuncio){
-        return  jdbcTemplate.update("update anuncio " + " set tipoanuncio = ?, tipoimovel = ?, cidade = ?, estado = ?, rua = ?, bairro = ?, areatotal = ?, areaconstruida = ?, descricao = ?, valor = ?, " +
+        return  jdbcTemplate.update("update anuncio set tipoanuncio = ?, tipoimovel = ?, cidade = ?, estado = ?, rua = ?, bairro = ?, areatotal = ?, areaconstruida = ?, descricao = ?, valor = ? " +
                         " where idanuncio = ?",
-                new Object[] {anuncio.getTipoanuncio(), anuncio.getTipoimovel(), anuncio.getCidade(), anuncio.getEstado(), anuncio.getRua(), anuncio.getBairro(), anuncio.getAreatotal(), anuncio.getAreaconstruida(), anuncio.getDescricao(), anuncio.getValor()});
+                new Object[] {
+                        anuncio.getTipoanuncio(),
+                        anuncio.getTipoimovel(),
+                        anuncio.getCidade(),
+                        anuncio.getEstado(),
+                        anuncio.getRua(),
+                        anuncio.getBairro(),
+                        anuncio.getAreatotal(),
+                        anuncio.getAreaconstruida(),
+                        anuncio.getDescricao(),
+                        anuncio.getValor(),
+                        anuncio.getIdanuncio()
+        });
     }
 }

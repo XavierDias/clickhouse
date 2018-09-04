@@ -56,7 +56,7 @@ public class AnuncioController {
         data.remove(name);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/edit/{id}")
     public ResponseEntity<Object> alter(@Valid @RequestBody Anuncio anuncio, @PathVariable long id) {
         Optional<Anuncio> temp = Optional.of(repositorio.findById(id));
 

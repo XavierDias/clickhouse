@@ -8,10 +8,10 @@
                     <h1 class="mb-4">Anúncio</h1>
 
                     <v-select
-                        v-model="anuncio.tipoanuncio"
-                        :items="tipoAnuncio"
-                        label="Tipo de Anúncio"
-                        :rules="tipoRules"
+                            v-model="anuncio.tipoanuncio"
+                            :items="tipoAnuncio"
+                            label="Tipo de Anúncio"
+                            :rules="tipoRules"
                     ></v-select>
 
                     <v-select
@@ -22,17 +22,17 @@
                     ></v-select>
 
                     <v-text-field
-                        v-model="anuncio.cidade"
-                        :rules="cidadeRules"
-                        label="Cidade"
-                        required
+                            v-model="anuncio.cidade"
+                            :rules="cidadeRules"
+                            label="Cidade"
+                            required
                     ></v-text-field>
 
                     <v-select
-                        v-model="anuncio.estado"
-                        :items="anuncioEstado"
-                        label="Estado"
-                        :rules="estadoRules"
+                            v-model="anuncio.estado"
+                            :items="anuncioEstado"
+                            label="Estado"
+                            :rules="estadoRules"
                     ></v-select>
 
                     <v-text-field
@@ -78,10 +78,10 @@
                     ></v-text-field>
 
                     <v-btn
-                        :disabled="!valid"
-                        @click="submit"
-                        color="primary"
-                        class="pull-right"
+                            :disabled="!valid"
+                            @click="submit"
+                            color="primary"
+                            class="pull-right"
                     >
                         <v-icon class="mr-1">save</v-icon> Salvar
                     </v-btn>
@@ -99,7 +99,8 @@
 
 <script>
     export default {
-        name: "AnuncioAdd",
+        name: "AnuncioEdit",
+        props: ['id'],
         data: function () {
             return {
                 valid: true,
@@ -160,11 +161,17 @@
 
 
         },
-
+        mounted: function () {
+            this.$http.get("/anuncio/" + this.id)
+                .then(function (data) {
+                    this.anuncio = data.body;
+                    console.log(data);
+                })
+        },
         methods: {
             submit () {
                 if (this.$refs.form.validate()) {
-                    this.$http.post('/anuncio/add', this.anuncio)
+                    this.$http.put('/anuncio/edit/' + this.anuncio.idanuncio, this.anuncio)
                         .then(
                             () => this.$router.push('/'),
                             (data) => console.log(data)
