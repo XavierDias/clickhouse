@@ -2,7 +2,7 @@ create table usuario
 (
   idusuario int primary key auto_increment,
   nome varchar (32) not null,
-  email varchar (32) not null,
+  email varchar (32) not null unique,
   telefone varchar (11) not null,
   senha varchar (255) not null
 );

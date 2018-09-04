@@ -126,7 +126,7 @@
         methods: {
             salvar () {
                 if (this.$refs.form.validate()) {
-                    this.$http.put('/usuario/edit/1', this.usuario)
+                    this.$http.put('/usuario/edit/', this.usuario)
                         .then(
                             () => this.$router.push('/'),
                             (data) => console.log(data)
