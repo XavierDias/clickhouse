@@ -1,9 +1,6 @@
-package com.xavierdias.clickhouse.bean;
-
-import org.hibernate.validator.constraints.UniqueElements;
+package com.xavierdias.clickhouse.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 

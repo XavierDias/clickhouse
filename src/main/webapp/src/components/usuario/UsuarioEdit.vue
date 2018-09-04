@@ -20,6 +20,7 @@
                             :rules="emailRules"
                             label="E-mail"
                             required
+                            disabled="true"
                     ></v-text-field>
 
                     <v-text-field
@@ -27,30 +28,6 @@
                             :mask="'(##) ##### - ####'"
                             :rules="telefoneRules"
                             label="Telefone"
-                            required
-                    ></v-text-field>
-
-                    <v-text-field
-                            v-model="usuario.senha"
-                            :append-icon="showPassword ? 'visibility_off' : 'visibility'"
-                            :rules="[passwordRules.required, passwordRules.min]"
-                            :type="showPassword ? 'text' : 'password'"
-                            label="Senha"
-                            hint="Mínimo de 8 carecteres"
-                            counter
-                            @click:append="showPassword = !showPassword"
-                            required
-                    ></v-text-field>
-
-                    <v-text-field
-                            v-model="usuario.senhaConfirmacao"
-                            :append-icon="showPassword ? 'visibility_off' : 'visibility'"
-                            :rules="[passwordConfirmRules.required]"
-                            :type="showPassword ? 'text' : 'password'"
-                            label="Confirmar senha"
-                            hint="Repita a senha"
-                            @click:append="showPassword = !showPassword"
-                            class="mb-4"
                             required
                     ></v-text-field>
 
@@ -85,9 +62,7 @@
                 usuario: {
                     nome: '',
                     email: '',
-                    telefone: '',
-                    senha: '',
-                    senhaConfirmacao: '',
+                    telefone: ''
                 },
                 nameRules: [
                     v => !!v || 'Nome é obrigatório',
@@ -99,26 +74,16 @@
                 ],
                 telefoneRules: [
                     v => !!v || 'Telefone é obrigatório',
-                ],
-                passwordRules: {
-                    required: value => !!value || 'Senha é obrigatória',
-                    min: v => v.length >= 8 || 'Mínimo de 8 carecteres',
-                },
-                passwordConfirmRules: {
-                    required: value => this.usuario.senha === value || 'Precisa ser igual a senha',
-                },
-                showPassword: false
+                ]
             };
         },
 
         mounted: function () {{
-            this.$http.get("/usuario/1")
+            this.$http.get("/usuario")
                 .then(resposta => resposta.json())
                 .then((resposta) => {
                     console.log("Recebido!");
                     this.usuario = resposta;
-                    this.usuario.senha = "";
-                    this.usuario.senhaConfirmacao = "";
                 }
             );
         }},
@@ -126,7 +91,7 @@
         methods: {
             salvar () {
                 if (this.$refs.form.validate()) {
-                    this.$http.put('/usuario/edit/', this.usuario)
+                    this.$http.put('/usuario/edit/' + this.usuario.idusuario, this.usuario)
                         .then(
                             () => this.$router.push('/'),
                             (data) => console.log(data)

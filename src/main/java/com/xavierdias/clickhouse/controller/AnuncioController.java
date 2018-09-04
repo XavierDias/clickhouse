@@ -1,10 +1,9 @@
 package com.xavierdias.clickhouse.controller;
 
-import com.xavierdias.clickhouse.bean.Anuncio;
-import com.xavierdias.clickhouse.bean.Usuario;
+import com.xavierdias.clickhouse.model.Anuncio;
+import com.xavierdias.clickhouse.model.Usuario;
 import com.xavierdias.clickhouse.repository.AnuncioJdbcRepository;
 import com.xavierdias.clickhouse.repository.UsuarioJdbcRepository;
-import com.xavierdias.clickhouse.security.UsuarioDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.ResponseEntity;
