@@ -13,8 +13,8 @@
                     <v-btn flat>
                         {{getUsername()}}
                     </v-btn>
-                    <v-btn router-link to="/anuncio/add" flat>
-                        Criar Anúncio
+                    <v-btn router-link to="/anuncio/usuario" flat>
+                        Meus Anúncios
                     </v-btn>
                     <v-btn @click="logout" flat>
                         Sair

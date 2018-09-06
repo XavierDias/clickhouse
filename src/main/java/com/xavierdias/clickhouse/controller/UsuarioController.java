@@ -1,8 +1,6 @@
 package com.xavierdias.clickhouse.controller;
 
 import com.xavierdias.clickhouse.model.Usuario;
-import com.xavierdias.clickhouse.repository.UsuarioJdbcRepository;
-import com.xavierdias.clickhouse.security.WebSecurityConfig;
 import com.xavierdias.clickhouse.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -11,9 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @EnableAutoConfiguration
