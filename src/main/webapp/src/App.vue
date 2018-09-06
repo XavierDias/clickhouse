@@ -10,7 +10,7 @@
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-toolbar-items v-if="isLoged()">
-                    <v-btn flat>
+                    <v-btn flat router-link to="/usuario/edit">
                         {{getUsername()}}
                     </v-btn>
                     <v-btn router-link to="/anuncio/usuario" flat>
@@ -52,7 +52,7 @@
                             localStorage.removeItem('isLoged');
                             localStorage.removeItem('username');
 
-                            this.$router.go();
+                            this.$router.go('/');
                         },
                         (data) => console.log(data)
                     );

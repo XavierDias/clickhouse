@@ -44,7 +44,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/usuario/edit/{id}")
-    public ResponseEntity<Object> alter(@Valid @RequestBody Usuario usuario, @PathVariable long id) {
+    public ResponseEntity<Object> alter(@RequestBody Usuario usuario, @PathVariable long id) {
         if(!this.usuarioService.editUsuario(id, usuario)){
             return ResponseEntity.badRequest().build();
         }
