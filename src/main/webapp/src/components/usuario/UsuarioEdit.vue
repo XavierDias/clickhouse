@@ -93,7 +93,10 @@
                 if (this.$refs.form.validate()) {
                     this.$http.put('/usuario/edit/' + this.usuario.idusuario, this.usuario)
                         .then(
-                            () => this.$router.push('/'),
+                            () => {
+                                localStorage.setItem('username', this.usuario.nome);
+                                this.$router.push('/');
+                            },
                             (data) => console.log(data)
                         );
                 }

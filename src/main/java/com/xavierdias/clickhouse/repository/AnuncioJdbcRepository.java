@@ -41,6 +41,10 @@ public class AnuncioJdbcRepository {
         return jdbcTemplate.query("select * from anuncio", new AnuncioRowMapper());
     }
 
+    public List<Anuncio> findByUsuarioId(long idusuario){
+        return jdbcTemplate.query("select * from anuncio where fk_idusuario=?", new Object[]{idusuario}, new AnuncioRowMapper());
+    }
+
     public Anuncio findById(long idanuncio){
         return  jdbcTemplate.queryForObject("select * from anuncio where idanuncio=?", new Object[]{idanuncio},
                 new BeanPropertyRowMapper<Anuncio>(Anuncio.class));

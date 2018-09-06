@@ -37,6 +37,10 @@ public class UsuarioService {
             return false;
         }
 
+        Usuario oldUsuario = temp.get();
+
+        usuario.setSenha(oldUsuario.getSenha());
+
         repositorio.update(usuario);
 
         return true;

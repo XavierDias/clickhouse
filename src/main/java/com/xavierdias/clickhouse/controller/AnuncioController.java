@@ -1,9 +1,7 @@
 package com.xavierdias.clickhouse.controller;
 
 import com.xavierdias.clickhouse.model.Anuncio;
-import com.xavierdias.clickhouse.model.Usuario;
-import com.xavierdias.clickhouse.repository.AnuncioJdbcRepository;
-import com.xavierdias.clickhouse.repository.UsuarioJdbcRepository;
+import com.xavierdias.clickhouse.service.AnuncioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +11,6 @@ import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @EnableAutoConfiguration
@@ -23,48 +20,47 @@ public class AnuncioController {
     public List<String> data = new ArrayList<>();
 
     @Autowired
-    private AnuncioJdbcRepository repositorio;
-
-    @Autowired
-    private UsuarioJdbcRepository usuarioRepository;
+    private AnuncioService anuncioService;
 
     @GetMapping("")
     public List<Anuncio> buscaTodosAnuncios(){
-        return repositorio.findAll();
+
+        return anuncioService.findAllAnuncios();
+    }
+
+    @GetMapping("/usuario")
+    public List<Anuncio> buscaTodosAnunciosUsuario(Principal user){
+
+        return anuncioService.findAllAnunciosByUser(user);
     }
 
     @GetMapping("/{id}")
     public Anuncio buscaAnuncio(@PathVariable long id){
-        Anuncio anuncio = repositorio.findById(id);
-
-        return anuncio;
+        return anuncioService.findAnuncioById(id);
     }
 
     @PostMapping("/add")
     public ResponseEntity<Object> add(@Valid @RequestBody Anuncio anuncio, Principal user) {
-        Usuario usuario = usuarioRepository.findByEmail(user.getName());
-
-        anuncio.setFk_idusuario(usuario.getIdusuario());
-        repositorio.insert(anuncio);
+        anuncioService.addAnuncio(anuncio, user);
 
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping
-    public void delete(@RequestBody String name) {
-        data.remove(name);
+    public ResponseEntity<Object> delete(@PathVariable long id) {
+        if (!anuncioService.deleteAnuncio(id)) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/edit/{id}")
     public ResponseEntity<Object> alter(@Valid @RequestBody Anuncio anuncio, @PathVariable long id) {
-        Optional<Anuncio> temp = Optional.of(repositorio.findById(id));
-
-        if(!temp.isPresent()){
-            return ResponseEntity.notFound().build();
+        if(!anuncioService.editAnuncio(anuncio, id)) {
+            return ResponseEntity.badRequest().build();
         }
 
-        repositorio.update(anuncio);
-
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 }
