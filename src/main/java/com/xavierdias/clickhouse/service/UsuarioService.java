@@ -18,14 +18,12 @@ public class UsuarioService {
 
     public void signup(Usuario usuario) {
         String password = securityConfig.passwordEncoder().encode(usuario.getSenha());
-
         usuario.setSenha(password);
         repositorio.insert(usuario);
     }
 
     public Usuario getUsuarioByEmail(String email) {
         Usuario usuario = repositorio.findByEmail(email);
-        usuario.setSenha("");
 
         return usuario;
     }
@@ -39,7 +37,10 @@ public class UsuarioService {
 
         Usuario oldUsuario = temp.get();
 
-        usuario.setSenha(oldUsuario.getSenha());
+        if (oldUsuario.getSenha() != usuario.getSenha()) {
+            String password = securityConfig.passwordEncoder().encode(usuario.getSenha());
+            usuario.setSenha(password);
+        }
 
         repositorio.update(usuario);
 

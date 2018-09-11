@@ -31,6 +31,28 @@
                             required
                     ></v-text-field>
 
+                    <v-text-field
+                            v-model="novaSenha"
+                            :append-icon="showPassword ? 'visibility_off' : 'visibility'"
+                            :rules="[passwordRules.required, passwordRules.min]"
+                            :type="showPassword ? 'text' : 'password'"
+                            label="Senha"
+                            hint="Mínimo de 8 carecteres"
+                            counter
+                            @click:append="showPassword = !showPassword"
+                    ></v-text-field>
+
+                    <v-text-field
+                            v-model="novaSenhaConfirmacao"
+                            :append-icon="showPassword ? 'visibility_off' : 'visibility'"
+                            :rules="[passwordConfirmRules.required]"
+                            :type="showPassword ? 'text' : 'password'"
+                            label="Confirmar senha"
+                            hint="Repita a senha"
+                            @click:append="showPassword = !showPassword"
+                            class="mb-4"
+                    ></v-text-field>
+
                     <v-btn
                             :disabled="!valid"
                             @click="salvar"
@@ -62,8 +84,10 @@
                 usuario: {
                     nome: '',
                     email: '',
-                    telefone: ''
+                    telefone: '',
                 },
+                novaSenha: '',
+                novaSenhaConfirmacao: '',
                 nameRules: [
                     v => !!v || 'Nome é obrigatório',
                     v => (v && v.length <= 32) || 'Nome pode ter nomáximo 32 caracteres'
@@ -74,7 +98,14 @@
                 ],
                 telefoneRules: [
                     v => !!v || 'Telefone é obrigatório',
-                ]
+                ],
+                passwordRules: {
+                    min: v => !v || v.length >= 8 || 'Mínimo de 8 carecteres'
+                },
+                passwordConfirmRules: {
+                    required: v => !v || this.novaSenha === v || 'Precisa ser igual a senha',
+                },
+                showPassword: false
             };
         },
 
@@ -91,6 +122,8 @@
         methods: {
             salvar () {
                 if (this.$refs.form.validate()) {
+                    this.usuario.password = this.usuario.senha = this.novaSenha || this.usuario.senha;
+
                     this.$http.put('/usuario/edit/' + this.usuario.idusuario, this.usuario)
                         .then(
                             () => {
