@@ -37,7 +37,7 @@ public class UsuarioService {
 
         Usuario oldUsuario = temp.get();
 
-        if (oldUsuario.getSenha() != usuario.getSenha()) {
+        if (!oldUsuario.getSenha().equals(usuario.getSenha())) {
             String password = securityConfig.passwordEncoder().encode(usuario.getSenha());
             usuario.setSenha(password);
         }
