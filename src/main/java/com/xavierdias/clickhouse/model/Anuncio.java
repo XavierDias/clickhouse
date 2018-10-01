@@ -4,10 +4,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="anuncio")
-public class Anuncio {
+@Table(name = "anuncio")
+public class Anuncio{
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idanuncio;
 
     @NotNull
@@ -44,7 +44,7 @@ public class Anuncio {
     private long fk_idusuario;
 
 
-    public Anuncio(){
+    public Anuncio() {
         super();
     }
 
@@ -52,6 +52,7 @@ public class Anuncio {
     public long getIdanuncio() {
         return idanuncio;
     }
+
     public void setIdanuncio(long idanuncio) {
         this.idanuncio = idanuncio;
     }
@@ -59,6 +60,7 @@ public class Anuncio {
     public String getTipoanuncio() {
         return tipoanuncio;
     }
+
     public void setTipoanuncio(String tipoanuncio) {
         this.tipoanuncio = tipoanuncio;
     }
@@ -66,6 +68,7 @@ public class Anuncio {
     public String getTipoimovel() {
         return tipoimovel;
     }
+
     public void setTipoimovel(String tipoimovel) {
         this.tipoimovel = tipoimovel;
     }
@@ -73,6 +76,7 @@ public class Anuncio {
     public String getCidade() {
         return cidade;
     }
+
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
@@ -80,6 +84,7 @@ public class Anuncio {
     public String getEstado() {
         return estado;
     }
+
     public void setEstado(String estado) {
         this.estado = estado;
     }
@@ -87,6 +92,7 @@ public class Anuncio {
     public String getRua() {
         return rua;
     }
+
     public void setRua(String rua) {
         this.rua = rua;
     }
@@ -94,6 +100,7 @@ public class Anuncio {
     public String getBairro() {
         return bairro;
     }
+
     public void setBairro(String bairro) {
         this.bairro = bairro;
     }
@@ -101,6 +108,7 @@ public class Anuncio {
     public double getAreatotal() {
         return areatotal;
     }
+
     public void setAreatotal(double areatotal) {
         this.areatotal = areatotal;
     }
@@ -108,6 +116,7 @@ public class Anuncio {
     public double getAreaconstruida() {
         return areaconstruida;
     }
+
     public void setAreaconstruida(double areaconstruida) {
         this.areaconstruida = areaconstruida;
     }
@@ -115,6 +124,7 @@ public class Anuncio {
     public String getDescricao() {
         return descricao;
     }
+
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
@@ -122,6 +132,7 @@ public class Anuncio {
     public double getValor() {
         return valor;
     }
+
     public void setValor(double valor) {
         this.valor = valor;
     }
@@ -129,12 +140,13 @@ public class Anuncio {
     public long getFk_idusuario() {
         return fk_idusuario;
     }
+
     public void setFk_idusuario(Long fk_idusuario) {
         this.fk_idusuario = fk_idusuario;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("Anuncio [id = %s, tipoanuncio = %s, tipoimovel = %s, cidade = %s, estado = %s, rua = %s, bairro = %s, areatotal = %s, areaconstruida = %s, descricao = %s, valor = %s, fk_id= %s]", idanuncio, tipoanuncio, tipoimovel, cidade, estado,
                 rua, bairro, areatotal, areaconstruida, descricao, valor, fk_idusuario);
     }
