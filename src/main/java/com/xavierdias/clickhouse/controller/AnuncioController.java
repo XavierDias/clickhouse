@@ -30,8 +30,17 @@ public class AnuncioController {
 
     @GetMapping("/usuario")
     public List<Anuncio> buscaTodosAnunciosUsuario(Principal user){
-
         return anuncioService.findAllAnunciosByUser(user);
+    }
+
+    @GetMapping("/usuario/venda")
+    public List<Anuncio> buscaTodosAnunciosVendaUsuario(Principal user){
+        return anuncioService.findAllAnunciosVendaByUser(user);
+    }
+
+    @GetMapping("/usuario/aluguel")
+    public List<Anuncio> buscaTodosAnunciosAluguelUsuario(Principal user){
+        return anuncioService.findAllAnunciosAluguelByUser(user);
     }
 
     @GetMapping("/{id}")

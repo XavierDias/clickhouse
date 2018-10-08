@@ -30,6 +30,18 @@ public class AnuncioService {
         return repositorio.findByUsuarioId(usuario.getIdusuario());
     }
 
+    public List<Anuncio> findAllAnunciosVendaByUser(Principal user) {
+        Usuario usuario = usuarioRepository.findByEmail(user.getName());
+
+        return repositorio.findVendaByUsuarioId(usuario.getIdusuario());
+    }
+
+    public List<Anuncio> findAllAnunciosAluguelByUser(Principal user) {
+        Usuario usuario = usuarioRepository.findByEmail(user.getName());
+
+        return repositorio.findAluguelByUsuarioId(usuario.getIdusuario());
+    }
+
     public Anuncio findAnuncioById(long id) {
         Anuncio anuncio = repositorio.findById(id);
 
