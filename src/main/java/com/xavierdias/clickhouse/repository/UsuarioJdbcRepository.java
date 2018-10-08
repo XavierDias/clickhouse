@@ -6,14 +6,13 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 @Component
-@Repository
+@Service
 public class UsuarioJdbcRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;

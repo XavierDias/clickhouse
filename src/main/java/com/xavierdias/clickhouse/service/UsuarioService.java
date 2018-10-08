@@ -4,10 +4,12 @@ import com.xavierdias.clickhouse.model.Usuario;
 import com.xavierdias.clickhouse.repository.UsuarioJdbcRepository;
 import com.xavierdias.clickhouse.security.WebSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Component
 @Service
 public class UsuarioService {
     @Autowired

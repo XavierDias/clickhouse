@@ -2,39 +2,44 @@ package com.xavierdias.clickhouse;
 
 import com.xavierdias.clickhouse.model.Usuario;
 import com.xavierdias.clickhouse.repository.UsuarioJdbcRepository;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.jdbc.SqlConfig;
-import org.springframework.test.context.jdbc.SqlGroup;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.context.jdbc.SqlConfig.TransactionMode.ISOLATED;
+
+import static org.junit.Assert.assertEquals;
 
 @SpringBootTest
-//@Sql(value = "/carrega-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-//@Sql(value = "/limpa-data.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-@Sql(
-        scripts = "classpath:/test/carrega-data.sql",
-        config = @SqlConfig(transactionMode = ISOLATED),
-        executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
-)
-@Sql(
-        scripts = "classpath:/test/limpa-data.sql",
-        config = @SqlConfig(transactionMode = ISOLATED),
-        executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD
-)
+@ComponentScan(basePackages = "com.xavierdias.clickhouse.repository.UsuarioJdbcRepository")
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@TestPropertySource("classpath:application-test.properties")
-
-
 public class UsuarioRepositoryTest {
+    @Autowired
+    private UsuarioJdbcRepository usuarioRepository;
+
+    Usuario usuario;
+
+    @Autowired
+    private TestEntityManager manager;
+
+    @Before
+    public void before(){
+        usuario = new Usuario();
+        usuario.setNome("Joao");
+        usuario.setEmail("joao@gmail.com");
+        usuario.setTelefone("993458976");
+        usuario.setSenha("12345678");
+        manager.persist(usuario);
+        manager.flush();
+    }
     @Test
-    public void contextLoads() {
+    public void testeParaEncontrarUsuarioPorEmail() {
+        Usuario retornado = usuarioRepository.findByEmail(usuario.getEmail());
+        assertEquals(usuario.getEmail(), retornado);
     }
 }
