@@ -7,6 +7,8 @@ import AnuncioAdd from './components/anuncio/AnuncioAdd.vue'
 import AnuncioEdit from './components/anuncio/AnuncioEdit.vue'
 import AnuncioUsuario from './components/anuncio/AnuncioUsuario.vue'
 import Home from './components/home/Home.vue'
+import AnunciosVenda from './components/relatorios/AnunciosVenda'
+import AnunciosAluguel from './components/relatorios/AnunciosAluguel'
 
 Vue.use(Router)
 
@@ -48,6 +50,16 @@ export default new Router({
             path: '/anuncio/usuario',
             name: 'anuncio-usuario',
             component: AnuncioUsuario
+        },
+        {
+            path: '/relatorios/venda',
+            name: 'anuncios-venda',
+            component: AnunciosVenda
+        },
+        {
+            path: '/relatorios/aluguel',
+            name: 'anuncios-aluguel',
+            component: AnunciosAluguel
         },
     ]
 })
