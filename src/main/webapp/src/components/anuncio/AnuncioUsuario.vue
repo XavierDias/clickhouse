@@ -5,6 +5,14 @@
             <v-icon class="mr-1">add</v-icon> Criar Anúncio
         </v-btn>
 
+        <v-btn router-link to="/relatorios/venda">
+            Relatório de Vendas
+        </v-btn>
+
+        <v-btn router-link to="/relatorios/aluguel">
+            Relatório de Aluguel
+        </v-btn>
+
         <v-container fluid grid-list-md>
             <v-layout row wrap>
 

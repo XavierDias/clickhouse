@@ -54,12 +54,12 @@ export default new Router({
         {
             path: '/relatorios/venda',
             name: 'anuncios-venda',
-            component: AnunciosVenda
+            component: AnunciosVenda,
         },
         {
             path: '/relatorios/aluguel',
             name: 'anuncios-aluguel',
-            component: AnunciosAluguel
+            component: AnunciosAluguel,
         },
     ]
 })
