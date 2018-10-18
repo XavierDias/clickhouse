@@ -25,7 +25,7 @@ public class AnuncioController {
     @GetMapping("")
     public List<Anuncio> buscaTodosAnuncios(){
 
-        return anuncioService.findAllAnuncios();
+        return anuncioService.findAllAnuncio();
     }
 
     @GetMapping("/usuario")

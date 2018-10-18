@@ -3,6 +3,7 @@ package com.xavierdias.clickhouse.service;
 import com.xavierdias.clickhouse.model.Anuncio;
 import com.xavierdias.clickhouse.model.Usuario;
 import com.xavierdias.clickhouse.repository.AnuncioJdbcRepository;
+import com.xavierdias.clickhouse.repository.AnuncioRepository;
 import com.xavierdias.clickhouse.repository.UsuarioJdbcRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,13 +16,16 @@ import java.util.Optional;
 public class AnuncioService {
 
     @Autowired
+    private AnuncioRepository anuncioRepository;
+
+    @Autowired
     private AnuncioJdbcRepository repositorio;
 
     @Autowired
     private UsuarioJdbcRepository usuarioRepository;
 
-    public List<Anuncio> findAllAnuncios() {
-        return repositorio.findAll();
+    public List<Anuncio> findAllAnuncio() {
+        return anuncioRepository.findAll();
     }
 
     public List<Anuncio> findAllAnunciosByUser(Principal user) {

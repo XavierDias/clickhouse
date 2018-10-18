@@ -19,10 +19,10 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class UsuarioRepositoryTest {
+    Usuario usuario;
+
     @Autowired
     private UsuarioJdbcRepository usuarioRepository;
-
-    Usuario usuario;
 
     @Autowired
     private TestEntityManager manager;
@@ -32,7 +32,7 @@ public class UsuarioRepositoryTest {
         usuario = new Usuario();
         usuario.setNome("Joao");
         usuario.setEmail("joao@gmail.com");
-        usuario.setTelefone("993458976");
+        usuario.setTelefone("67993458976");
         usuario.setSenha("12345678");
         manager.persist(usuario);
         manager.flush();
