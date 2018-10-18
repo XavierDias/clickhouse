@@ -65,8 +65,8 @@
                                 console.log(data);
                                 this.$router.push('/');
 
-                                localStorage.setItem('isLoged', true);
-                                localStorage.setItem('username', data.body.nome);
+                                window.localStorage.setItem('isLoged', true);
+                                window.localStorage.setItem('username', data.body.nome);
                             },
                             (data) => console.log(data)
                         );

@@ -40,17 +40,17 @@
     export default {
         methods: {
             isLoged: function () {
-                return localStorage.getItem('isLoged');
+                return window.localStorage.getItem('isLoged');
             },
             getUsername: function () {
-                return localStorage.getItem('username');
+                return window.localStorage.getItem('username');
             },
             logout: function () {
                 this.$http.get('/logout')
                     .then(
                         () => {
-                            localStorage.removeItem('isLoged');
-                            localStorage.removeItem('username');
+                            window.localStorage.removeItem('isLoged');
+                            window.localStorage.removeItem('username');
 
                             this.$router.go('/');
                         },
