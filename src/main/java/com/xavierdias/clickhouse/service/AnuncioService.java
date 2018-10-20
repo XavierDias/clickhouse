@@ -18,8 +18,8 @@ public class AnuncioService {
     @Autowired
     private AnuncioRepository anuncioRepository;
 
-    @Autowired
-    private AnuncioJdbcRepository repositorio;
+    //@Autowired
+    //private AnuncioJdbcRepository repositorio;
 
     @Autowired
     private UsuarioJdbcRepository usuarioRepository;
@@ -35,7 +35,7 @@ public class AnuncioService {
     }
 
     public Anuncio findAnuncioById(long id) {
-        Anuncio anuncio = repositorio.findById(id);
+        Anuncio anuncio = anuncioRepository.findAnuncioById(id);
 
         return anuncio;
     }

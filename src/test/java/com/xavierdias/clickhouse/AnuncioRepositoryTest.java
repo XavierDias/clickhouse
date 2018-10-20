@@ -30,6 +30,7 @@ public class AnuncioRepositoryTest {
     @Before
     public void before(){
         anuncio = new Anuncio();
+        anuncio.setIdanuncio(1);
         anuncio.setTipoanuncio("Aluguel");
         anuncio.setTipoimovel("Residencial");
         anuncio.setCidade("Campo Grande");
@@ -48,5 +49,11 @@ public class AnuncioRepositoryTest {
     public void testeParaEncontrarTodosAnuncios() {
         List<Anuncio> retornado = anuncioRepository.findAllAnuncio();
         Assert.assertTrue(retornado.size() == 1);
+    }
+
+    @Test
+    public void testeParaEncontrarAnuncioPorId(){
+        Anuncio retornado = anuncioRepository.findAnuncioById(1);
+        assertEquals(retornado, 1);
     }
 }
