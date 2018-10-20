@@ -14,5 +14,10 @@ public interface AnuncioRepository extends JpaRepository<Anuncio, Long> {
     @Query(value = "SELECT * FROM anuncio WHERE idanuncio=?", nativeQuery = true)
     Anuncio findAnuncioById(long id);
 
+    @Query(value = "SELECT * FROM anuncio WHERE fk_idusuario=?", nativeQuery = true)
+    List<Anuncio> findByUsuarioId(long idusuario);
+
+    @Query(value = "DELETE * FROM anuncio WHERE idanuncio=?", nativeQuery = true)
+
 
 }

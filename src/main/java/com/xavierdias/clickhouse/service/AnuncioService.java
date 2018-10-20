@@ -31,7 +31,7 @@ public class AnuncioService {
     public List<Anuncio> findAllAnunciosByUser(Principal user) {
         Usuario usuario = usuarioRepository.findByEmail(user.getName());
 
-        return repositorio.findByUsuarioId(usuario.getIdusuario());
+        return anuncioRepository.findByUsuarioId(usuario.getIdusuario());
     }
 
     public Anuncio findAnuncioById(long id) {
