@@ -1,7 +1,7 @@
 package com.xavierdias.clickhouse.service;
 
 import com.xavierdias.clickhouse.model.Usuario;
-import com.xavierdias.clickhouse.repository.UsuarioJdbcRepository;
+import com.xavierdias.clickhouse.repository.UsuarioRepository;
 import com.xavierdias.clickhouse.security.WebSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,13 +14,13 @@ public class UsuarioService {
     private WebSecurityConfig securityConfig;
 
     @Autowired
-    private UsuarioJdbcRepository repositorio;
+    private UsuarioRepository repositorio;
 
     public void signup(Usuario usuario) {
         String password = securityConfig.passwordEncoder().encode(usuario.getSenha());
 
         usuario.setSenha(password);
-        repositorio.insert(usuario);
+        repositorio.save(usuario);
     }
 
     public Usuario getUsuarioByEmail(String email) {
@@ -41,7 +41,7 @@ public class UsuarioService {
 
         usuario.setSenha(oldUsuario.getSenha());
 
-        repositorio.update(usuario);
+        repositorio.save(usuario);
 
         return true;
     }
