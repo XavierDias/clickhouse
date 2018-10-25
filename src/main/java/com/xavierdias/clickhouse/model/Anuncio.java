@@ -129,7 +129,7 @@ public class Anuncio {
     public long getFk_idusuario() {
         return fk_idusuario;
     }
-    public void setFk_idusuario(Long fk_idusuario) {
+    public void setFk_idusuario(long fk_idusuario) {
         this.fk_idusuario = fk_idusuario;
     }
 
