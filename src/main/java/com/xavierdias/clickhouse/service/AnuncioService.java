@@ -3,13 +3,12 @@ package com.xavierdias.clickhouse.service;
 import com.xavierdias.clickhouse.model.Anuncio;
 import com.xavierdias.clickhouse.model.Usuario;
 import com.xavierdias.clickhouse.report.CSVReport;
-import com.xavierdias.clickhouse.repository.AnuncioJdbcRepository;
-import com.xavierdias.clickhouse.repository.UsuarioJdbcRepository;
+import com.xavierdias.clickhouse.repository.AnuncioRepository;
+import com.xavierdias.clickhouse.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,10 +16,10 @@ import java.util.Optional;
 public class AnuncioService {
 
     @Autowired
-    private AnuncioJdbcRepository repositorio;
+    private AnuncioRepository repositorio;
 
     @Autowired
-    private UsuarioJdbcRepository usuarioRepository;
+    private UsuarioRepository usuarioRepository;
 
     private CSVReport csvReport = new CSVReport("Listagem de Anuncios");
 
@@ -64,7 +63,7 @@ public class AnuncioService {
         Usuario usuario = usuarioRepository.findByEmail(user.getName());
 
         anuncio.setFk_idusuario(usuario.getIdusuario());
-        repositorio.insert(anuncio);
+        repositorio.save(anuncio);
     }
 
     public boolean editAnuncio(Anuncio anuncio, long id) {
@@ -74,7 +73,7 @@ public class AnuncioService {
             return false;
         }
 
-        repositorio.update(anuncio);
+        repositorio.save(anuncio);
 
         return true;
     }

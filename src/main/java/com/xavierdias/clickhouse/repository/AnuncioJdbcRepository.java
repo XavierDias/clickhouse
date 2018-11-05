@@ -34,7 +34,6 @@ public class AnuncioJdbcRepository {
             anuncio.setFk_idusuario(resultSet.getLong("fk_idusuario"));
             return anuncio;
         }
-
     }
 
     public List<Anuncio> findAll(){
