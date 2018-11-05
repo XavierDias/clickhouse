@@ -15,12 +15,12 @@ public interface AnuncioRepository extends JpaRepository<Anuncio, Long> {
     @Query(value = "SELECT * FROM anuncio WHERE fk_idusuario=:usuario_id", nativeQuery = true)
     List<Anuncio> findByUsuarioId(@Param("usuario_id") long idusuario);
 
-    @Query(value = "SELECT * FROM anuncio WHERE tipoanuncio = 'venda' AND fk_idusuario=usuario_id", nativeQuery = true)
+    @Query(value = "SELECT * FROM anuncio WHERE tipoanuncio = 'venda' AND fk_idusuario=:usuario_id", nativeQuery = true)
     List<Anuncio> findVendaByUsuarioId(@Param("usuario_id") long idusuario);
 
-    @Query(value = "SELECT * FROM anuncio WHERE tipoanuncio = 'aluguel' AND fk_idusuario=usuario_id", nativeQuery = true)
+    @Query(value = "SELECT * FROM anuncio WHERE tipoanuncio = 'aluguel' AND fk_idusuario=:usuario_id", nativeQuery = true)
     List<Anuncio> findAluguelByUsuarioId(@Param("usuario_id") long idusuario);
 
-    @Query(value = "SELECT * FROM anuncio WHERE idanuncio=anuncio_id", nativeQuery = true)
+    @Query(value = "SELECT * FROM anuncio WHERE idanuncio=:anuncio_id", nativeQuery = true)
     Anuncio findById(@Param("anuncio_id") long idanuncio);
 }
