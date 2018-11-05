@@ -2,6 +2,7 @@ package com.xavierdias.clickhouse.service;
 
 import com.xavierdias.clickhouse.model.Anuncio;
 import com.xavierdias.clickhouse.model.Usuario;
+import com.xavierdias.clickhouse.report.CSVReport;
 import com.xavierdias.clickhouse.repository.AnuncioRepository;
 import com.xavierdias.clickhouse.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class AnuncioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    private CSVReport csvReport = new CSVReport("Listagem de Anuncios");
+
     public List<Anuncio> findAllAnuncios() {
         return repositorio.findAll();
     }
@@ -30,10 +33,18 @@ public class AnuncioService {
         return repositorio.findByUsuarioId(usuario.getIdusuario());
     }
 
-    public List<Anuncio> findAllAnunciosVendaByUser(Principal user) {
+    public List findAllAnunciosVendaByUser(Principal user) {
         Usuario usuario = usuarioRepository.findByEmail(user.getName());
+        List itens = repositorio.findVendaByUsuarioId(usuario.getIdusuario());
 
-        return repositorio.findVendaByUsuarioId(usuario.getIdusuario());
+        return itens;
+    }
+
+    public String exportAnunciosVendaToCsv(Principal user, List ordem) {
+        Usuario usuario = usuarioRepository.findByEmail(user.getName());
+        List itens = repositorio.findVendaByUsuarioId(usuario.getIdusuario());
+
+        return csvReport.generateReport(itens, ordem);
     }
 
     public List<Anuncio> findAllAnunciosAluguelByUser(Principal user) {
