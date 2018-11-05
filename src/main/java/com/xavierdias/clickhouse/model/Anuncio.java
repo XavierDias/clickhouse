@@ -1,11 +1,17 @@
 package com.xavierdias.clickhouse.model;
 
+import com.xavierdias.clickhouse.report.ToMapInterface;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name="anuncio")
-public class Anuncio {
+public class Anuncio implements ToMapInterface {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long idanuncio;
@@ -137,6 +143,23 @@ public class Anuncio {
     public String toString(){
         return String.format("Anuncio [id = %s, tipoanuncio = %s, tipoimovel = %s, cidade = %s, estado = %s, rua = %s, bairro = %s, areatotal = %s, areaconstruida = %s, descricao = %s, valor = %s, fk_id= %s]", idanuncio, tipoanuncio, tipoimovel, cidade, estado,
                 rua, bairro, areatotal, areaconstruida, descricao, valor, fk_idusuario);
+    }
+
+    public Map<String, ?> toMap() {
+        Map lista = new HashMap();
+
+        lista.put("idanuncio", idanuncio);
+        lista.put("tipoanuncio", tipoanuncio);
+        lista.put("tipoimovel", tipoimovel);
+        lista.put("cidade", cidade);
+        lista.put("estado", estado);
+        lista.put("bairro", bairro);
+        lista.put("areatotal", areatotal);
+        lista.put("areaconstruida", areaconstruida);
+        lista.put("descricao", descricao);
+        lista.put("valor", valor);
+
+        return lista;
     }
 }
 

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.lang.reflect.Array;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,6 @@ public class AnuncioController {
 
     @GetMapping("")
     public List<Anuncio> buscaTodosAnuncios(){
-
         return anuncioService.findAllAnuncios();
     }
 
@@ -34,8 +34,13 @@ public class AnuncioController {
     }
 
     @GetMapping("/usuario/venda")
-    public List<Anuncio> buscaTodosAnunciosVendaUsuario(Principal user){
+    public List buscaTodosAnunciosVendaUsuario(Principal user){
         return anuncioService.findAllAnunciosVendaByUser(user);
+    }
+
+    @GetMapping("/usuario/venda/csv/[{ordem}]")
+    public String exportAnunciosVendaToCsv(@PathVariable List<String> ordem, Principal user){
+        return anuncioService.exportAnunciosVendaToCsv(user, ordem);
     }
 
     @GetMapping("/usuario/aluguel")
