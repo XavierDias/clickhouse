@@ -3,12 +3,13 @@ package com.xavierdias.clickhouse.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Collection;
 
 @Entity
 @Table(name="usuario")
 public class Usuario{
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idusuario;
     
     @NotNull
@@ -24,6 +25,12 @@ public class Usuario{
     @Size(min = 8, message = "Senha deve ter no mínimo 8 caracteres")
     private String senha;
 
+
+    @ManyToMany
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "idusuario"),
+    inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "idrole"))
+
+    private Collection<Role> roles;
 
     public Usuario(){
         super();

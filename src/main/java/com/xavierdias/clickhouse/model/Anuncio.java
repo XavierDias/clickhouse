@@ -13,7 +13,7 @@ import java.util.Map;
 @Table(name="anuncio")
 public class Anuncio implements ToMapInterface {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idanuncio;
 
     @NotNull
