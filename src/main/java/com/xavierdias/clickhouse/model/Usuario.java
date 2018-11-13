@@ -86,6 +86,13 @@ public class Usuario{
         this.senha = senha;
     }
 
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString(){
         return String.format("Usuário [id = %s, nome = %s, email = %s, telefone = %s, senha = %s]", idusuario, nome, email, telefone, senha);

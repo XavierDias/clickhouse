@@ -35,3 +35,16 @@ create table privilege
   idprivilege int primary key auto_increment,
   name varchar (32) not null
 );
+
+create table users_roles
+(
+  id
+  foreign key (fk_idusuario) references usuario(idusuario),
+  foreign key (fk_idusuario) references usuario(idusuario)
+);
+
+create table roles_privileges
+(
+  foreign key (fk_idusuario) references usuario(idusuario),
+  foreign key (fk_idusuario) references usuario(idusuario)
+);
