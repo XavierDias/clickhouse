@@ -24,3 +24,12 @@ create table anuncio
   foreign key (fk_idusuario) references usuario(idusuario)
 );
 
+create table usuario_anuncio
+(
+  idusuarioanuncio int primary key auto_increment,
+  fk_idusuario int null,
+  fk_idanuncio int null,
+  foreign key (fk_idusuario) references usuario(idusuario),
+  foreign key (fk_idanuncio) references anuncio(idanuncio)
+);
+

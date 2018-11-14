@@ -2,8 +2,10 @@ package com.xavierdias.clickhouse.service;
 
 import com.xavierdias.clickhouse.model.Anuncio;
 import com.xavierdias.clickhouse.model.Usuario;
+import com.xavierdias.clickhouse.model.UsuarioAnuncio;
 import com.xavierdias.clickhouse.report.CSVReport;
 import com.xavierdias.clickhouse.repository.AnuncioRepository;
+import com.xavierdias.clickhouse.repository.UsuarioAnuncioRepository;
 import com.xavierdias.clickhouse.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,9 @@ public class AnuncioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private UsuarioAnuncioRepository usuarioAnuncioRepository;
 
     private CSVReport csvReport = new CSVReport("Listagem de Anuncios");
 
@@ -86,6 +91,38 @@ public class AnuncioService {
         }
 
         repositorio.deleteById(id);
+
+        return true;
+    }
+
+    public boolean favAnuncio(long id, Principal user) {
+        Usuario usuario = usuarioRepository.findByEmail(user.getName());
+
+        usuarioAnuncioRepository.insertUsuarioAnuncio(
+            id,
+            usuario.getIdusuario()
+        );
+
+        return true;
+    }
+
+    public boolean unfavAnuncio(long id, Principal user) {
+        Usuario usuario = usuarioRepository.findByEmail(user.getName());
+        Optional<UsuarioAnuncio> temp = Optional.of(
+            usuarioAnuncioRepository.findByUusarioAnuncioId(
+                id,
+                usuario.getIdusuario()
+            )
+        );
+
+        if(!temp.isPresent()){
+            return false;
+        }
+
+        usuarioAnuncioRepository.deleteByUusarioAnuncioId(
+            id,
+            usuario.getIdusuario()
+        );
 
         return true;
     }

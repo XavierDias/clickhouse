@@ -3,6 +3,8 @@ package com.xavierdias.clickhouse.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="usuario")
@@ -24,11 +26,18 @@ public class Usuario{
     @Size(min = 8, message = "Senha deve ter no mínimo 8 caracteres")
     private String senha;
 
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+        name = "usuario_anuncio",
+        joinColumns = { @JoinColumn(name = "fk_idusuario") },
+        inverseJoinColumns = { @JoinColumn(name = "fk_idanuncio") }
+    )
+    Set<Anuncio> anuncios = new HashSet<>();
+
 
     public Usuario(){
         super();
     }
-
 
     public long getIdusuario() {
         return idusuario;
@@ -78,6 +87,9 @@ public class Usuario{
     public void setPassword(String senha) {
         this.senha = senha;
     }
+
+    public Set<Anuncio> getAnuncios() { return anuncios; }
+    public void setAnuncios(Set<Anuncio> anuncios) { this.anuncios = anuncios; }
 
     @Override
     public String toString(){
