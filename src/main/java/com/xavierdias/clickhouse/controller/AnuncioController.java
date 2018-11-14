@@ -77,4 +77,20 @@ public class AnuncioController {
 
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/fav/{id}")
+    public ResponseEntity<Object> fav(@PathVariable long id, Principal user) {
+        anuncioService.favAnuncio(id, user);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/unfav/{id}")
+    public ResponseEntity<Object> unfav(@PathVariable long id, Principal user) {
+        if (!anuncioService.unfavAnuncio(id, user)) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.ok().build();
+    }
 }

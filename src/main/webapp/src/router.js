@@ -9,6 +9,7 @@ import AnuncioUsuario from './components/anuncio/AnuncioUsuario.vue'
 import Home from './components/home/Home.vue'
 import AnunciosVenda from './components/relatorios/AnunciosVenda'
 import AnunciosAluguel from './components/relatorios/AnunciosAluguel'
+import AnuncioFavoritos from './components/anuncio/AnuncioFavoritos'
 
 Vue.use(Router)
 
@@ -61,5 +62,10 @@ export default new Router({
             name: 'anuncios-aluguel',
             component: AnunciosAluguel,
         },
+        {
+            path: '/anuncio/favoritos',
+            name: 'anuncio-favoritos',
+            component: AnuncioFavoritos
+        }
     ]
 })
