@@ -4,10 +4,7 @@ import com.xavierdias.clickhouse.report.ToMapInterface;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Entity
 @Table(name="anuncio")
@@ -48,6 +45,9 @@ public class Anuncio implements ToMapInterface {
 
     @NotNull
     private long fk_idusuario;
+
+    @ManyToMany(mappedBy = "anuncios")
+    private Set<Usuario> usuarios = new HashSet<>();
 
 
     public Anuncio(){
@@ -138,6 +138,9 @@ public class Anuncio implements ToMapInterface {
     public void setFk_idusuario(long fk_idusuario) {
         this.fk_idusuario = fk_idusuario;
     }
+
+    public Set<Usuario> getUsuarios() { return usuarios; }
+    public void setUsuarios(Set<Usuario> usuarios) { this.usuarios = usuarios; }
 
     @Override
     public String toString(){

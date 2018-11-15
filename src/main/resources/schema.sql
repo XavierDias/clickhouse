@@ -38,13 +38,27 @@ create table privilege
 
 create table users_roles
 (
-  id
+  idusersroles int primary key auto_increment,
+  fk_idusuario int null,
+  fk_role int null,
   foreign key (fk_idusuario) references usuario(idusuario),
-  foreign key (fk_idusuario) references usuario(idusuario)
+  foreign key (fk_role) references role(idrole)
 );
 
 create table roles_privileges
 (
+  idrolesprivileges int primary key auto_increment,
+  fk_role int null,
+  fk_privilege int null,
+  foreign key (fk_role) references role(idrole),
+  foreign key (fk_privilege) references privilege(idprivilege)
+);
+
+create table usuario_anuncio
+(
+  idusuarioanuncio int primary key auto_increment,
+  fk_idusuario int null,
+  fk_idanuncio int null,
   foreign key (fk_idusuario) references usuario(idusuario),
-  foreign key (fk_idusuario) references usuario(idusuario)
+  foreign key (fk_idanuncio) references anuncio(idanuncio)
 );

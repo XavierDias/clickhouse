@@ -4,6 +4,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
 
 @Entity
 @Table(name="usuario")
@@ -25,17 +28,32 @@ public class Usuario{
     @Size(min = 8, message = "Senha deve ter no mínimo 8 caracteres")
     private String senha;
 
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+        name = "usuario_anuncio",
+        joinColumns = { @JoinColumn(name = "fk_idusuario") },
+        inverseJoinColumns = { @JoinColumn(name = "fk_idanuncio") }
+    )
+    Set<Anuncio> anuncios = new HashSet<>();
+
 
     @ManyToMany
-    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "idusuario"),
-    inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "idrole"))
-
+    @JoinTable(
+        name = "users_roles",
+        joinColumns = @JoinColumn(
+            name = "user_id",
+            referencedColumnName = "idusuario"
+        ),
+        inverseJoinColumns = @JoinColumn(
+            name = "role_id",
+            referencedColumnName = "idrole"
+        )
+    )
     private Collection<Role> roles;
 
     public Usuario(){
         super();
     }
-
 
     public long getIdusuario() {
         return idusuario;
@@ -86,12 +104,16 @@ public class Usuario{
         this.senha = senha;
     }
 
+
     public Collection<Role> getRoles() {
         return roles;
     }
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
     }
+
+    public Set<Anuncio> getAnuncios() { return anuncios; }
+    public void setAnuncios(Set<Anuncio> anuncios) { this.anuncios = anuncios; }
 
     @Override
     public String toString(){
