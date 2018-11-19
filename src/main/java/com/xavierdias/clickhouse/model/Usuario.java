@@ -3,14 +3,16 @@ package com.xavierdias.clickhouse.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+
 
 @Entity
 @Table(name="usuario")
 public class Usuario{
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idusuario;
     
     @NotNull
@@ -34,6 +36,20 @@ public class Usuario{
     )
     Set<Anuncio> anuncios = new HashSet<>();
 
+
+    @ManyToMany
+    @JoinTable(
+        name = "users_roles",
+        joinColumns = @JoinColumn(
+            name = "user_id",
+            referencedColumnName = "idusuario"
+        ),
+        inverseJoinColumns = @JoinColumn(
+            name = "role_id",
+            referencedColumnName = "idrole"
+        )
+    )
+    private Collection<Role> roles;
 
     public Usuario(){
         super();
@@ -86,6 +102,14 @@ public class Usuario{
     }
     public void setPassword(String senha) {
         this.senha = senha;
+    }
+
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 
     public Set<Anuncio> getAnuncios() { return anuncios; }

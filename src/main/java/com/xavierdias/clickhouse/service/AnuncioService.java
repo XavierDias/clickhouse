@@ -109,7 +109,7 @@ public class AnuncioService {
     public boolean unfavAnuncio(long id, Principal user) {
         Usuario usuario = usuarioRepository.findByEmail(user.getName());
         Optional<UsuarioAnuncio> temp = Optional.of(
-            usuarioAnuncioRepository.findByUusarioAnuncioId(
+            usuarioAnuncioRepository.findByUsuarioAnuncioId(
                 id,
                 usuario.getIdusuario()
             )

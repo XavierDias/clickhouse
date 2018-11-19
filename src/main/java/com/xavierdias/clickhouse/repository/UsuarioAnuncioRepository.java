@@ -18,7 +18,7 @@ public interface UsuarioAnuncioRepository extends JpaRepository<UsuarioAnuncio, 
         value = "SELECT * FROM usuario_anuncio WHERE fk_idanuncio=:anuncio_id AND fk_idusuario=:usuario_id",
         nativeQuery = true
     )
-    UsuarioAnuncio findByUusarioAnuncioId(@Param("anuncio_id") long idanuncio, @Param("usuario_id") long idusuario);
+    UsuarioAnuncio findByUsuarioAnuncioId(@Param("anuncio_id") long idanuncio, @Param("usuario_id") long idusuario);
 
     @Query(
         value = "INSERT INTO usuario_anuncio (fk_idanuncio, fk_idusuario) VALUES(:anuncio_id, :usuario_id)",
