@@ -16,21 +16,21 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository repositorio;
 
-    public void signup(Usuario usuario) {
+    public void signup(final Usuario usuario) {
         String password = securityConfig.passwordEncoder().encode(usuario.getSenha());
 
         usuario.setSenha(password);
         repositorio.save(usuario);
     }
 
-    public Usuario getUsuarioByEmail(String email) {
+    public Usuario getUsuarioByEmail(final String email) {
         Usuario usuario = repositorio.findByEmail(email);
         usuario.setSenha("");
 
         return usuario;
     }
 
-    public boolean editUsuario(long id, Usuario usuario) {
+    public boolean editUsuario(final long id, final Usuario usuario) {
         Optional<Usuario> temp = Optional.of(repositorio.findById(id));
 
         if(!temp.isPresent()){

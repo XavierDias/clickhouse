@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface AnuncioRepository extends JpaRepository<Anuncio, Long> {
 
+    @Override
     @Query(value = "SELECT * FROM anuncio", nativeQuery = true)
     List<Anuncio> findAll();
 

@@ -20,8 +20,8 @@ public class Role {
 
     private Collection<Privilege> privileges;
 
-    public Role(){
-        super();
+    public Role(String name) {
+        this.name = name;
     }
 
     public long getIdrole() {

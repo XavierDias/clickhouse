@@ -17,6 +17,11 @@ public class UsuarioAnuncio {
     @NotNull
     private long fk_idusuario;
 
+    public UsuarioAnuncio(final long idusuarioanuncio, final Anuncio anuncio){
+        this.idusuarioanuncio = idusuarioanuncio;
+        this.anuncio = anuncio;
+    }
+
     public long getIdusuarioanuncio() { return idusuarioanuncio; }
 
     public void setIdusuarioanuncio(long idusuarioanuncio) { this.idusuarioanuncio = idusuarioanuncio; }

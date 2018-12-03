@@ -1,7 +1,6 @@
 package com.xavierdias.clickhouse.report;
 
 import java.util.List;
-import java.util.Map;
 
 public abstract class AbstractReport {
 
@@ -9,7 +8,7 @@ public abstract class AbstractReport {
     public static final String BODY = "body";
     public static final String FOOTER = "footer";
 
-    public String generateReport(List itens, List<String> ordem) {
+    public String generateReport(final List itens, final List<String> ordem) {
         String report = "";
 
         for (String element : ordem) {
@@ -23,6 +22,9 @@ public abstract class AbstractReport {
                 case FOOTER:
                     report = report + footer();
                     break;
+                default:
+                    report = report + detail(itens);
+                    break;
             }
         }
 
@@ -31,7 +33,7 @@ public abstract class AbstractReport {
 
     abstract protected String header();
 
-    abstract protected String detail(List<ToMapInterface> itens);
+    abstract protected String detail(final List<ToMapInterface> itens);
 
     abstract protected String footer();
 }

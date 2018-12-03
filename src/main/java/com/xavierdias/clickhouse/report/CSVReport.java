@@ -8,7 +8,8 @@ public class CSVReport extends AbstractReport {
 
     public String titulo = "Relatório";
 
-    public CSVReport(String titulo) {
+    public CSVReport(final String titulo) {
+        super();
         this.titulo = titulo;
     }
 
@@ -18,14 +19,16 @@ public class CSVReport extends AbstractReport {
     }
 
     @Override
-    protected String detail(List<ToMapInterface> itens) {
+    protected String detail(final List<ToMapInterface> itens) {
         String report = "";
         Map row;
 
         for (ToMapInterface item : itens) {
             row = item.toMap();
 
-            for (Object field : row.entrySet()) report += field.toString() + "; ";
+            for (Object field : row.entrySet()) {
+                report += field.toString() + "; ";
+            }
 
             report += "\n";
         }
