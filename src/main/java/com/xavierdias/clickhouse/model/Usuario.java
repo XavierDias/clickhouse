@@ -51,8 +51,8 @@ public class Usuario{
     )
     private Collection<Role> roles;
 
-    public Usuario(){
-        super();
+    public Usuario(@NotNull String nome) {
+        this.nome = nome;
     }
 
     public long getIdusuario() {

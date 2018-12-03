@@ -49,11 +49,9 @@ public class Anuncio implements ToMapInterface {
     @ManyToMany(mappedBy = "anuncios")
     private Set<Usuario> usuarios = new HashSet<>();
 
-
-    public Anuncio(){
-        super();
+    public Anuncio(@NotNull String tipoanuncio) {
+        this.tipoanuncio = tipoanuncio;
     }
-
 
     public long getIdanuncio() {
         return idanuncio;
@@ -148,6 +146,7 @@ public class Anuncio implements ToMapInterface {
                 rua, bairro, areatotal, areaconstruida, descricao, valor, fk_idusuario);
     }
 
+    @Override
     public Map<String, ?> toMap() {
         Map lista = new HashMap();
 
